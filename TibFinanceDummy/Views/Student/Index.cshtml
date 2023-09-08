@@ -16,6 +16,11 @@
                 <th>Student Name</th>
                 <th>Address</th>
                 <th>Roll</th>
+                <th>Mother Name</th>
+                <th>FatherName</th>
+                <th>BloodGroup</th>
+                <th>Phone</th>
+                <th>Gender</th>
                 <th>Department Name</th>
                 <th>Action(Edit)</th>
                 <th>Action(Delete)</th>
@@ -37,19 +42,35 @@
                     <form id="form">
                         <fieldset id="SubmitForm">
                             @Html.HiddenFor(m => m.StudentId, new { @id = "StudentId" })
-                            <div class="form-group">
-                                @Html.TextBoxFor(m => m.StudentName, new { @id = "StudnetName", @class = "form-control", @placeholder = "StudentName" })
+                            @Html.HiddenFor(m => m.Std_Other_Info_ID, new { @id = "Std_Other_Info_ID" })
+                            <div class="form-group mt-2">
+                                @Html.TextBoxFor(m => m.StudentName, new { @id = "StudentName", @class = "form-control", @placeholder = "StudentName" })
                             </div>
-                            <div class="form-group">
+                            <div class="form-group mt-2">
                                 @Html.TextBoxFor(m => m.Roll, new { @id = "Roll", @class = "form-control", @placeholder = "Roll" })
                             </div>
-                            <div class="form-group">
+                            <div class="form-group mt-2">
                                 @Html.TextBoxFor(m => m.Address, new { @id = "Address", @class = "form-control", @placeholder = "Address" })
                             </div>
-                            <div class="form-group">
+                            <div class="form-group mt-2 ">
+                                @Html.TextBoxFor(m => m.Std_Mother_Name, new { @id = "StdMotherName", @class = "form-control", @placeholder = "MotherName" })
+                            </div>
+                            <div class="form-group mt-2">
+                                @Html.TextBoxFor(m => m.Std_Father_Name, new { @id = "StdFatherName", @class = "form-control", @placeholder = "FatherName" })
+                            </div>
+                            <div class="form-group mt-2">
+                                @Html.TextBoxFor(m => m.Std_BloodGroup, new { @id = "StdBloodGroup", @class = "form-control", @placeholder = "BloodGroup" })
+                            </div>
+                            <div class="form-group mt-2">
+                                @Html.TextBoxFor(m => m.Std_Phone, new { @id = "StdPhone", @class = "form-control", @placeholder = "Phone" })
+                            </div>
+                            <div class="form-group mt-2">
+                                @Html.TextBoxFor(m => m.Std_Gender, new { @id = "StdGender", @class = "form-control", @placeholder = "Gender" })
+                            </div>
+                            <div class="form-group mt-2">
                                 @Html.DropDownListFor(m => m.DepartmentId, ViewBag.ListOfDepartment as SelectList, "--Select Dept--", new { @id = "DropDwn", @class = "form-control" })
                             </div>
-                            <div class="form-group">
+                            <div class="form-group mt-2">
                                 <a href="#" class="btn btn-block btn-danger" id="SaveStudentRecord">Save</a>
                             </div>
 
@@ -73,6 +94,11 @@
                 "<td>" + StudentList[i].StudentName + "</td>" +
                 "<td>" + StudentList[i].Address + "</td>" +
                 "<td>" + StudentList[i].Roll + "</td>" +
+                "<td>" + StudentList[i].Std_Mother_Name + "</td>" +
+                "<td>" + StudentList[i].Std_Father_Name + "</td>" +
+                "<td>" + StudentList[i].Std_BloodGroup + "</td>" +
+                "<td>" + StudentList[i].Std_Phone + "</td>" +
+                "<td>" + StudentList[i].Std_Gender + "</td>" +
                 "<td>" + StudentList[i].DepartmentName + "</td>" +
                 "<td>" + "<a href='#' class='btn btn-warning' onclick='EditStudentRecord(" + StudentList[i].StudentId + ")' ><span class='glyphicon glyphicon-edit'></span>Edit</a>" + "</td>" +
                 "<td>" + "<a href='#' class='btn btn-danger' onclick='ConfirmDelete(" + StudentList[i].StudentId + ")'><span class='glyphicon glyphicon-trash'></span>Delete</a>" + "</td>" +
@@ -111,10 +137,16 @@
             url: url,
             success: function (data) {
                 var obj = JSON.parse(data);
+                $("#Std_Other_Info_ID").val(obj.Std_Other_Info_ID);
                 $("#StudentId").val(obj.StudentId);
                 $("#StudentName").val(obj.StudentName);
                 $("#Address").val(obj.Address);
                 $("#Roll").val(obj.Roll);
+                $("#StdMotherName").val(obj.Std_Mother_Name);
+                $("#StdFatherName").val(obj.Std_Father_Name);
+                $("#StdBloodGroup").val(obj.Std_BloodGroup);
+                $("#StdPhone").val(obj.Std_Phone);
+                $("#StdGender").val(obj.Std_Gender);
                 $("#DropDwn option:selected").text(obj.DepartmentName);
                 $("#DropDwn option:selected").val(obj.DepartmentId);
 

@@ -22,6 +22,18 @@
           <Property Name="Roll" Type="int" />
           <Property Name="DepartmentId" Type="int" />
         </EntityType>
+        <EntityType Name="StudentDetailInfos">
+          <Key>
+            <PropertyRef Name="Std_Other_Info_ID" />
+          </Key>
+          <Property Name="Std_Other_Info_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudentId" Type="int" />
+          <Property Name="Std_Father_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Std_Mother_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Std_Phone" Type="varchar" MaxLength="50" />
+          <Property Name="Std_Gender" Type="varchar" MaxLength="50" />
+          <Property Name="Std_BloodGroup" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="UserId" />
@@ -34,6 +46,7 @@
         <EntityContainer Name="tibfinancedummydbModelStoreContainer">
           <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentDetailInfos" EntityType="Self.StudentDetailInfos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -61,6 +74,7 @@
           <EntitySet Name="Departments" EntityType="Self.Department" />
           <EntitySet Name="Students" EntityType="Self.Student" />
           <EntitySet Name="Users" EntityType="tibfinancedummydbModel.User" />
+          <EntitySet Name="StudentDetailInfos" EntityType="tibfinancedummydbModel.StudentDetailInfo" />
         </EntityContainer>
         <EntityType Name="User">
           <Key>
@@ -70,6 +84,18 @@
           <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="StudentDetailInfo">
+          <Key>
+            <PropertyRef Name="Std_Other_Info_ID" />
+          </Key>
+          <Property Name="Std_Other_Info_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentId" Type="Int32" />
+          <Property Name="Std_Father_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Std_Mother_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Std_Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Std_Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Std_BloodGroup" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -103,6 +129,19 @@
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentDetailInfos">
+            <EntityTypeMapping TypeName="tibfinancedummydbModel.StudentDetailInfo">
+              <MappingFragment StoreEntitySet="StudentDetailInfos">
+                <ScalarProperty Name="Std_BloodGroup" ColumnName="Std_BloodGroup" />
+                <ScalarProperty Name="Std_Gender" ColumnName="Std_Gender" />
+                <ScalarProperty Name="Std_Phone" ColumnName="Std_Phone" />
+                <ScalarProperty Name="Std_Mother_Name" ColumnName="Std_Mother_Name" />
+                <ScalarProperty Name="Std_Father_Name" ColumnName="Std_Father_Name" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="Std_Other_Info_ID" ColumnName="Std_Other_Info_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

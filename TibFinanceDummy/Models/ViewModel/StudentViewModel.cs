@@ -13,6 +13,12 @@ namespace TibFinanceDummy.Models.ViewModel
         public int Roll {  get; set; }
         public Nullable<int> DepartmentId { get; set; }
         public string DepartmentName { get; set; }
+        public int Std_Other_Info_ID { get; set; }
+        public string Std_Father_Name { get; set; }
+        public string Std_Mother_Name { get; set; }
+        public string Std_Phone { get; set; }
+        public string Std_Gender { get; set; }
+        public string Std_BloodGroup { get; set; }
 
     }
 }

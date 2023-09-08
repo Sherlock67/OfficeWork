@@ -21,6 +21,7 @@
     <EntitySet Name="Departments" EntityType="Self.Department" />
     <EntitySet Name="Students" EntityType="Self.Student" />
     <EntitySet Name="Users" EntityType="tibfinancedummydbModel.User" />
+    <EntitySet Name="StudentDetailInfos" EntityType="tibfinancedummydbModel.StudentDetailInfo" />
   </EntityContainer>
   <EntityType Name="User">
     <Key>
@@ -30,5 +31,17 @@
     <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="StudentDetailInfo">
+    <Key>
+      <PropertyRef Name="Std_Other_Info_ID" />
+    </Key>
+    <Property Name="Std_Other_Info_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StudentId" Type="Int32" />
+    <Property Name="Std_Father_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Std_Mother_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Std_Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Std_Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Std_BloodGroup" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
 </Schema>

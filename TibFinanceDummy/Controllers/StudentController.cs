@@ -22,22 +22,53 @@ namespace TibFinanceDummy.Controllers
         }
         public JsonResult GetStudentList()
         {
-            var studentList = from student in db.Students
+            var studentList =( from student in db.Students
                               join department in db.Departments
-                              on student.DepartmentId equals department.DepartmentId
+                              on student.DepartmentId equals department.DepartmentId 
+                              join info in db.StudentDetailInfos
+                              on student.StudentId equals info.StudentId into studentDetailInfos 
+                              from studentDetailInfo in studentDetailInfos.DefaultIfEmpty()
                               select new
                               {
                                   student.StudentId,
                                   student.StudentName,
-                                  student.Address,
                                   student.Roll,
-                                  DepartmentName = department.DepartmentName
-                              };
+                                  student.Address,
+                                  department.DepartmentId,
+                                  department.DepartmentName,
+                                  studentDetailInfo.Std_Father_Name,
+                                  studentDetailInfo.Std_Mother_Name,
+                                  studentDetailInfo.Std_Gender,
+                                  studentDetailInfo.Std_Phone,
+                                  studentDetailInfo.Std_BloodGroup
+                              }).ToList();
+            
             return Json(studentList, JsonRequestBehavior.AllowGet);
         }
         public JsonResult GetStudentById(int? studentId)
         {
-            Student singleStudent = db.Students.Where(x => x.StudentId == studentId).FirstOrDefault();
+            var singleStudent = (from student in db.Students
+                                join department in db.Departments
+                                on student.DepartmentId equals department.DepartmentId
+                                join info in db.StudentDetailInfos
+                                on student.StudentId equals info.StudentId into studentDetailInfos
+                                from studentDetailInfo in studentDetailInfos.DefaultIfEmpty()
+                                where student.StudentId == studentId
+                                select new
+                                {
+                                    student.StudentId,
+                                    student.StudentName,
+                                    student.Roll,
+                                    student.Address,
+                                    department.DepartmentId,
+                                    department.DepartmentName,
+                                    studentDetailInfo.Std_Father_Name,
+                                    studentDetailInfo.Std_Mother_Name,
+                                    studentDetailInfo.Std_Gender,
+                                    studentDetailInfo.Std_Phone,
+                                    studentDetailInfo.Std_BloodGroup
+                                }).FirstOrDefault();
+            //Student singleStudent = db.Students.Where(x => x.StudentId == studentId).FirstOrDefault();
             string value = string.Empty;
             value = JsonConvert.SerializeObject(singleStudent, Formatting.Indented, new JsonSerializerSettings
             {
@@ -51,24 +82,67 @@ namespace TibFinanceDummy.Controllers
             var result = false;
             if (studentViewModel.StudentId > 0)
             {
-
-                Student student = db.Students.Where(x => x.StudentId == studentViewModel.StudentId).FirstOrDefault();
-               
-                student.StudentName = studentViewModel.StudentName;
-                student.Roll = studentViewModel.Roll;
-                student.Address = studentViewModel.Address;
-                student.DepartmentId = studentViewModel.DepartmentId;
+                var student = db.Students.Where(x => x.StudentId == studentViewModel.StudentId).FirstOrDefault();
+                if (student != null)
+                {
+                    student.StudentName = studentViewModel.StudentName;
+                    student.Address = studentViewModel.Address;
+                    student.DepartmentId = studentViewModel.DepartmentId;
+                    student.Roll = studentViewModel.Roll;
+                    //exSt.StudentId=
+                }
+                var info = db.StudentDetailInfos.Where(x => x.StudentId == studentViewModel.StudentId).FirstOrDefault();
+                if (info != null)
+                {
+                    info.Std_Father_Name = studentViewModel.Std_Father_Name;
+                    info.Std_Mother_Name = studentViewModel.Std_Mother_Name;
+                    info.Std_BloodGroup = studentViewModel.Std_BloodGroup;
+                    info.Std_Phone = studentViewModel.Std_Phone;
+                    info.Std_Gender = studentViewModel.Std_Gender;
+                    info.Std_BloodGroup = studentViewModel.Std_BloodGroup;
+                }
+                //var students = new Student()
+                //{
+                //    StudentId = studentViewModel.StudentId,
+                //    StudentName = studentViewModel.StudentName,
+                //    Roll = studentViewModel.Roll,
+                //    Address = studentViewModel.Address,
+                //    DepartmentId = studentViewModel.DepartmentId,
+                //};
+                //var studentDetailInfo = new StudentDetailInfo()
+                //{
+                //    StudentId = studentViewModel.StudentId,
+                //    Std_Other_Info_ID = studentViewModel.Std_Other_Info_ID,
+                //    Std_BloodGroup = studentViewModel.Std_BloodGroup,
+                //    Std_Father_Name = studentViewModel.Std_Father_Name,
+                //    Std_Gender = studentViewModel.Std_Gender,
+                //    Std_Phone = studentViewModel.Std_Phone,
+                //    Std_Mother_Name = studentViewModel.Std_Mother_Name,
+                //};
                 result = true;
                 db.SaveChanges();
             }
             else
             {
-                Student student = new Student();
-                student.StudentName = studentViewModel.StudentName;
-                student.Address = studentViewModel.Address;
-                student.Roll = studentViewModel.Roll;
-                student.DepartmentId = studentViewModel.DepartmentId;
-                db.Students.Add(student); db.SaveChanges();
+                var student = new Student()
+                {
+                    StudentName = studentViewModel.StudentName,
+                    Roll = studentViewModel.Roll,
+                    Address = studentViewModel.Address,
+                    DepartmentId = studentViewModel.DepartmentId,
+                };
+                var studentDetailInfo = new StudentDetailInfo()
+                {
+                    Std_BloodGroup = studentViewModel.Std_BloodGroup,
+                    Std_Father_Name = studentViewModel.Std_Father_Name,
+                    Std_Gender = studentViewModel.Std_Gender,
+                    Std_Phone = studentViewModel.Std_Phone,
+                    Std_Mother_Name = studentViewModel.Std_Mother_Name,
+                };
+              
+                db.Students.Add(student);
+                db.StudentDetailInfos.Add(studentDetailInfo);
+                db.SaveChanges();
                 result = true;
             }
             return Json(result, JsonRequestBehavior.AllowGet);
@@ -115,10 +189,8 @@ namespace TibFinanceDummy.Controllers
                 return Json(new { success = true }, JsonRequestBehavior.AllowGet);
             }
             else
-
             {
                 return Json(new { success = false }, JsonRequestBehavior.AllowGet);
-
             }
         }
     }
