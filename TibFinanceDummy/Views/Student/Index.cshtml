@@ -1,4 +1,4 @@
-﻿@model TibFinanceDummy.Models.ViewModel.StudentViewModel
+﻿﻿@model TibFinanceDummy.Models.ViewModel.StudentViewModel
 @{
     Layout = null;
 }
@@ -63,7 +63,7 @@
 
 
 <script>
-   
+
     $.get("/Student/GetStudentList", null, GetAllStudents);
     function GetAllStudents(StudentList) {
         var SetData = $("#SetStudentList");
@@ -78,7 +78,7 @@
                 "<td>" + "<a href='#' class='btn btn-danger' onclick='ConfirmDelete(" + StudentList[i].StudentId + ")'><span class='glyphicon glyphicon-trash'></span>Delete</a>" + "</td>" +
                 "</tr>";
             SetData.append(Data);
-           
+
 
         }
     }

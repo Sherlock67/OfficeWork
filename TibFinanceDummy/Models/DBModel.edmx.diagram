@@ -7,6 +7,7 @@
       <Diagram DiagramId="d7a0871bec994004947c435ff7f12dfb" Name="Diagram1">
         <EntityTypeShape EntityType="tibfinancedummydbModel.Department" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="tibfinancedummydbModel.Student" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="tibfinancedummydbModel.User" Width="1.5" PointX="5.125" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

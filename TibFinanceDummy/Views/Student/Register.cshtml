@@ -1,0 +1,44 @@
+﻿@model TibFinanceDummy.Models.User
+@{
+    ViewBag.Title = "Index";
+}
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+<h2>User Registration</h2>
+<form id="form">
+    <fieldset id="SubmitForm">
+
+        <div class="form-group">
+            @Html.TextBoxFor(m => m.UserName, new { @id = "UserName", @class = "form-control", @placeholder = "User Name" })
+        </div>
+        <div class="form-group mt-3">
+            @Html.TextBoxFor(m => m.Email, new { @id = "Email", @class = "form-control", @placeholder = "Email" })
+        </div>
+        <div class="form-group mt-3">
+            @Html.TextBoxFor(m => m.Password, new { @id = "Password", @class = "form-control", @placeholder = "Password" })
+        </div>
+        <div class="form-group mt-3">
+            <a href="#" class="btn btn-block btn-danger" id="SaveUserInfo">Register</a>
+        </div>
+    </fieldset>
+</form>
+<script>
+    function AddNewUser() {
+        $("#form")[0].reset();
+        $("#UserId").val(0);
+    }
+    $("#SaveUserInfo").click(function () {
+        var data = $("#SubmitForm").serialize();
+        $.ajax({
+            type: "Post",
+            url: "/Student/Register",
+            data: data,
+            success: function (result) {
+                window.location.href = "/Student/Login";
+
+            }
+        })
+    })
+</script>

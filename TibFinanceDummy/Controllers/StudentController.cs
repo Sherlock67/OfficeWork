@@ -53,7 +53,7 @@ namespace TibFinanceDummy.Controllers
             {
 
                 Student student = db.Students.Where(x => x.StudentId == studentViewModel.StudentId).FirstOrDefault();
-                //Student student = new Student();
+               
                 student.StudentName = studentViewModel.StudentName;
                 student.Roll = studentViewModel.Roll;
                 student.Address = studentViewModel.Address;
@@ -83,9 +83,43 @@ namespace TibFinanceDummy.Controllers
                 db.SaveChanges();
                 result = true;
             }
-           
-
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Register()
+        {
+            return View();
+        }
+        [HttpPost]
+        public JsonResult Register(User user)
+        {
+            User u = new User();
+            u.UserName = user.UserName;
+            u.Email = user.Email;
+            u.Password = user.Password;
+            db.Users.Add(u);
+            db.SaveChanges();
+            return Json(u, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public JsonResult Login(string username, string password)
+        {
+            User user = new User();
+            var userCredentials = from c in db.Users where c.UserName == username && c.Password == password select c;
+            if (userCredentials.Count() > 0)
+            {
+                return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+            }
+            else
+
+            {
+                return Json(new { success = false }, JsonRequestBehavior.AllowGet);
+
+            }
         }
     }
 }
