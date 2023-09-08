@@ -9,6 +9,7 @@
         <EntityTypeShape EntityType="tibfinancedummydbModel.Student" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="tibfinancedummydbModel.User" Width="1.5" PointX="5.125" PointY="0.75" />
         <EntityTypeShape EntityType="tibfinancedummydbModel.StudentDetailInfo" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="tibfinancedummydbModel.Grade" Width="1.5" PointX="9.25" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

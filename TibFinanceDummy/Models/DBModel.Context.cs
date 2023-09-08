@@ -29,5 +29,6 @@ namespace TibFinanceDummy.Models
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<StudentDetailInfo> StudentDetailInfos { get; set; }
+        public virtual DbSet<Grade> Grades { get; set; }
     }
 }

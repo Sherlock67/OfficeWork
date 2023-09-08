@@ -31,6 +31,9 @@
             <tr id="LoadingStatus" style="color:red"></tr>
         </tbody>
     </table>
+    <div id="paged">
+
+    </div>
     <div class="modal fade" id="MyModal">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -85,7 +88,15 @@
 
 <script>
 
-    $.get("/Student/GetStudentList", null, GetAllStudents);
+    $(document).ready(function () {
+        GetStudentList(1);
+    });
+    function StudentList(pageNum, pageSize) {
+        $$("#SetStudentList").empty();
+        $("#paged").empty();
+        $.get("/Student/GetStudentList", null, GetAllStudents);
+    }
+    
     function GetAllStudents(StudentList) {
         var SetData = $("#SetStudentList");
         for (var i = 0; i < StudentList.length; i++) {
@@ -104,8 +115,31 @@
                 "<td>" + "<a href='#' class='btn btn-danger' onclick='ConfirmDelete(" + StudentList[i].StudentId + ")'><span class='glyphicon glyphicon-trash'></span>Delete</a>" + "</td>" +
                 "</tr>";
             SetData.append(Data);
+        }
+    }
+    function PaggingTemplate(totalPage, currentPage) {
+        var template = "";
+        var TotalPage = totalPage;
+        var CurrentPage = currentPage
+        var PageNumberArray = [];
+        var counter = 1;
+        for (var i = currentPage; i <= totalPage; i++) {
+            PageNumberArray[0] = currentPage;
+            var FirstPage = 1;
+            var LastPage = totalPage;
+            if (totalPage != currentPage) {
+                var ForwardOne = currentPage + 1;
 
-
+            }
+            var backwarOne = 1;
+            if (currentPage > 1) {
+                backwarOne = currentPage - 1;
+            }
+            template = "<p>" + CurrentPage + " of " + TotalPages + " pages</p>"
+            template = template + '<ul class="pager">' +
+                '<li class="previous"><a href="#" onclick="GetPageData(' + FirstPage + ')"><i class="fa fa-fast-backward"></i>&nbsp;First</a></li>' +
+                '<li><select ng-model="pageSize" id="selectedId"><option value="20" selected>20</option><option value="50">50</option><option value="100">100</option><option value="150">150</option></select> </li>' +
+                '<li><a href="#" onclick="GetPageData(' + BackwardOne + ')"><i class="glyphicon glyphicon-backward"></i></a>';
         }
     }
     function AddNewStudent() {

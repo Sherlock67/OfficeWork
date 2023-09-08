@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TibFinanceDummy.Helper;
 using TibFinanceDummy.Models;
 using TibFinanceDummy.Models.ViewModel;
 
@@ -20,7 +21,7 @@ namespace TibFinanceDummy.Controllers
             ViewBag.ListOfDepartment = new SelectList(departments, "DepartmentId", "DepartmentName");
             return View();
         }
-        public JsonResult GetStudentList()
+        public JsonResult GetStudentList(int pageNumber = 1, int pageSize = 20)
         {
             var studentList =( from student in db.Students
                               join department in db.Departments
@@ -42,8 +43,8 @@ namespace TibFinanceDummy.Controllers
                                   studentDetailInfo.Std_Phone,
                                   studentDetailInfo.Std_BloodGroup
                               }).ToList();
-            
-            return Json(studentList, JsonRequestBehavior.AllowGet);
+            var pagedData = Pagination.PagedResult(studentList, pageNumber, pageSize);
+            return Json(pagedData, JsonRequestBehavior.AllowGet);
         }
         public JsonResult GetStudentById(int? studentId)
         {
@@ -101,24 +102,7 @@ namespace TibFinanceDummy.Controllers
                     info.Std_Gender = studentViewModel.Std_Gender;
                     info.Std_BloodGroup = studentViewModel.Std_BloodGroup;
                 }
-                //var students = new Student()
-                //{
-                //    StudentId = studentViewModel.StudentId,
-                //    StudentName = studentViewModel.StudentName,
-                //    Roll = studentViewModel.Roll,
-                //    Address = studentViewModel.Address,
-                //    DepartmentId = studentViewModel.DepartmentId,
-                //};
-                //var studentDetailInfo = new StudentDetailInfo()
-                //{
-                //    StudentId = studentViewModel.StudentId,
-                //    Std_Other_Info_ID = studentViewModel.Std_Other_Info_ID,
-                //    Std_BloodGroup = studentViewModel.Std_BloodGroup,
-                //    Std_Father_Name = studentViewModel.Std_Father_Name,
-                //    Std_Gender = studentViewModel.Std_Gender,
-                //    Std_Phone = studentViewModel.Std_Phone,
-                //    Std_Mother_Name = studentViewModel.Std_Mother_Name,
-                //};
+            
                 result = true;
                 db.SaveChanges();
             }
