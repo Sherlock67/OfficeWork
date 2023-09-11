@@ -31,7 +31,7 @@
             <tr id="LoadingStatus" style="color:red"></tr>
         </tbody>
     </table>
-    <div id="page">
+    <div id="page" class="text-center">
 
     </div>
     <div class="modal fade" id="MyModal">
@@ -86,137 +86,140 @@
 </div>
 
 
-  
-    <script>
-        let pageIndex = 1; let pageSize =5;
+
+<script>
+    let pageIndex = 1; let pageSize = 5;
+    $.get("/Student/GetStudentList?page=" + pageIndex + "&&pageSize=" + pageSize + "", null, GetAllStudents);
+
+    function onPaging(pageIndex, pageSize) {
+        var SetData = $("#SetStudentList");
+        SetData.html('');
         $.get("/Student/GetStudentList?page=" + pageIndex + "&&pageSize=" + pageSize + "", null, GetAllStudents);
-       
-        function onPaging(pageIndex, pageSize) {
-            var SetData = $("#SetStudentList");
-            SetData.html('');
-            $.get("/Student/GetStudentList?page=" + pageIndex + "&&pageSize=" + pageSize + "", null, GetAllStudents);
-      
+    }
+    function GetAllStudents(StudentList) {
+        var SetData = $("#SetStudentList");
+        for (var i = 0; i < StudentList.length; i++) {
+            var Data = "<tr class='row_" + StudentList[i].StudentId + "'>" +
+                "<td>" + StudentList[i].StudentId + "</td>" +
+                "<td>" + StudentList[i].StudentName + "</td>" +
+                "<td>" + StudentList[i].Address + "</td>" +
+                "<td>" + StudentList[i].Roll + "</td>" +
+                "<td>" + StudentList[i].Std_Mother_Name + "</td>" +
+                "<td>" + StudentList[i].Std_Father_Name + "</td>" +
+                "<td>" + StudentList[i].Std_BloodGroup + "</td>" +
+                "<td>" + StudentList[i].Std_Phone + "</td>" +
+                "<td>" + StudentList[i].Std_Gender + "</td>" +
+                "<td>" + StudentList[i].DepartmentName + "</td>" +
+                "<td>" + "<a href='#' class='btn btn-warning' onclick='EditStudentRecord(" + StudentList[i].StudentId + ")' ><span class='glyphicon glyphicon-edit'></span>Edit</a>" + "</td>" +
+                "<td>" + "<a href='#' class='btn btn-danger' onclick='ConfirmDelete(" + StudentList[i].StudentId + ")'><span class='glyphicon glyphicon-trash'></span>Delete</a>" + "</td>" +
+                "</tr>";
+
+
+            SetData.append(Data);
+
         }
-        function GetAllStudents(StudentList) {
-           var SetData = $("#SetStudentList");
-            for (var i = 0; i < StudentList.length; i++) {
-                var Data = "<tr class='row_" + StudentList[i].StudentId + "'>" +
-                    "<td>" + StudentList[i].StudentId + "</td>" +
-                    "<td>" + StudentList[i].StudentName + "</td>" +
-                    "<td>" + StudentList[i].Address + "</td>" +
-                    "<td>" + StudentList[i].Roll + "</td>" +
-                    "<td>" + StudentList[i].Std_Mother_Name + "</td>" +
-                    "<td>" + StudentList[i].Std_Father_Name + "</td>" +
-                    "<td>" + StudentList[i].Std_BloodGroup + "</td>" +
-                    "<td>" + StudentList[i].Std_Phone + "</td>" +
-                    "<td>" + StudentList[i].Std_Gender + "</td>" +
-                    "<td>" + StudentList[i].DepartmentName + "</td>" +
-                    "<td>" + "<a href='#' class='btn btn-warning' onclick='EditStudentRecord(" + StudentList[i].StudentId + ")' ><span class='glyphicon glyphicon-edit'></span>Edit</a>" + "</td>" +
-                    "<td>" + "<a href='#' class='btn btn-danger' onclick='ConfirmDelete(" + StudentList[i].StudentId + ")'><span class='glyphicon glyphicon-trash'></span>Delete</a>" + "</td>" +
-                    "</tr>";
-               
-                
-                SetData.append(Data);
-                
-            }
-            var paginationContainer = $("#page")[0];
-            paginate(StudentList, 5, paginationContainer);
-            
+        var paginationContainer = $("#page")[0];
+        if (StudentList.length > 0) {
+            if (StudentList[0].TotalData > pageSize)
+                paginate(StudentList, 5, paginationContainer);
         }
-       
-        function paginate(items, itemsPerPage, paginationContainer) {
-         
-            let currentPage = 1;
-            const totalPages = Math.ceil(11 / itemsPerPage);
 
-           
 
-            function setupPagination() {
-                const pagination = $("#page")[0];
-                pagination.innerHTML = "";
+    }
 
-                for (let i = 1; i <= totalPages; i++) {
-                    const link = document.createElement("a");
-                    link.href = "#";
-                    link.innerText = i;
+    function paginate(items, itemsPerPage, paginationContainer) {
 
-                    if (i === currentPage) {
-                        link.classList.add("active");
-                    }
+        let currentPage = 1;
+        const totalPages = Math.ceil(items[0].TotalData / itemsPerPage);
 
-                    link.addEventListener("click", (event) => {
-                        event.preventDefault();
-                        currentPage = i;
-                       
-                        onPaging(currentPage,5)
-                        const currentActive = pagination.querySelector(".active");
-                        currentActive.classList.remove("active");
-                        link.classList.add("active");
-                    });
-                   
-                    pagination.appendChild(link);
+
+
+        function setupPagination() {
+            const pagination = $("#page")[0];
+            pagination.innerHTML = "";
+
+            for (let i = 1; i <= totalPages; i++) {
+                const link = document.createElement("a");
+
+                link.href = "#";
+                link.innerText = i;
+                link.classList.add("m-2")
+                if (i === currentPage) {
+                    link.classList.add("active");
                 }
-            }
 
-           
-            setupPagination();
+                link.addEventListener("click", (event) => {
+                    event.preventDefault();
+                    currentPage = i;
+                    onPaging(currentPage, 5)
+                    const currentActive = pagination.querySelector(".active");
+                    currentActive.classList.remove("active");
+                    link.classList.add("active");
+                });
+
+                pagination.appendChild(link);
+            }
         }
-        function AddNewStudent() {
-            $("#form")[0].reset();
-            $("#StudentId").val(0);
-            $("#DropDwn option:selected").text("--Select Dept--");
-            //console.log('111')
-            $("#ModalTitle").html("Add New Student");
-            $("#MyModal").modal('show');
-        }
-        $("#SaveStudentRecord").click(function () {
-            var data = $("#SubmitForm").serialize();
-            $.ajax({
-                type: "Post",
-                url: "/Student/AddStudent",
-                data: data,
-                success: function (result) {
-                    window.location.href = "/Student/Index";
-                    $("#MyModal").modal("hide");
-                }
-            })
+
+
+        setupPagination();
+    }
+    function AddNewStudent() {
+        $("#form")[0].reset();
+        $("#StudentId").val(0);
+        $("#DropDwn option:selected").text("--Select Dept--");
+        //console.log('111')
+        $("#ModalTitle").html("Add New Student");
+        $("#MyModal").modal('show');
+    }
+    $("#SaveStudentRecord").click(function () {
+        var data = $("#SubmitForm").serialize();
+        $.ajax({
+            type: "Post",
+            url: "/Student/AddStudent",
+            data: data,
+            success: function (result) {
+                window.location.href = "/Student/Index";
+                $("#MyModal").modal("hide");
+            }
         })
-        function EditStudentRecord(StudentId) {
-            var url = "/Student/GetStudentById?StudentId=" + StudentId;
-            $("#ModalTitle").html("Update Student Record");
-            $("#MyModal").modal('show');
-            $.ajax({
-                type: "GET",
-                url: url,
-                success: function (data) {
-                    var obj = JSON.parse(data);
-                    $("#Std_Other_Info_ID").val(obj.Std_Other_Info_ID);
-                    $("#StudentId").val(obj.StudentId);
-                    $("#StudentName").val(obj.StudentName);
-                    $("#Address").val(obj.Address);
-                    $("#Roll").val(obj.Roll);
-                    $("#StdMotherName").val(obj.Std_Mother_Name);
-                    $("#StdFatherName").val(obj.Std_Father_Name);
-                    $("#StdBloodGroup").val(obj.Std_BloodGroup);
-                    $("#StdPhone").val(obj.Std_Phone);
-                    $("#StdGender").val(obj.Std_Gender);
-                    $("#DropDwn option:selected").text(obj.DepartmentName);
-                    $("#DropDwn option:selected").val(obj.DepartmentId);
+    })
+    function EditStudentRecord(StudentId) {
+        var url = "/Student/GetStudentById?StudentId=" + StudentId;
+        $("#ModalTitle").html("Update Student Record");
+        $("#MyModal").modal('show');
+        $.ajax({
+            type: "GET",
+            url: url,
+            success: function (data) {
+                var obj = JSON.parse(data);
+                $("#Std_Other_Info_ID").val(obj.Std_Other_Info_ID);
+                $("#StudentId").val(obj.StudentId);
+                $("#StudentName").val(obj.StudentName);
+                $("#Address").val(obj.Address);
+                $("#Roll").val(obj.Roll);
+                $("#StdMotherName").val(obj.Std_Mother_Name);
+                $("#StdFatherName").val(obj.Std_Father_Name);
+                $("#StdBloodGroup").val(obj.Std_BloodGroup);
+                $("#StdPhone").val(obj.Std_Phone);
+                $("#StdGender").val(obj.Std_Gender);
+                $("#DropDwn option:selected").text(obj.DepartmentName);
+                $("#DropDwn option:selected").val(obj.DepartmentId);
 
-                }
-            })
-        }
-      
-        var ConfirmDelete = function (StudentId) {
-            var StuId = $("#StudentId").val();
-            $.ajax({
-                type: "POST",
-                url: "/Student/DeleteStudentRecord?StudentId=" + StudentId,
-                success: function (result) {
-                    $(".row_" + StudentId).remove();
-                }
-            })
-        }
-    </script>
+            }
+        })
+    }
+
+    var ConfirmDelete = function (StudentId) {
+        var StuId = $("#StudentId").val();
+        $.ajax({
+            type: "POST",
+            url: "/Student/DeleteStudentRecord?StudentId=" + StudentId,
+            success: function (result) {
+                $(".row_" + StudentId).remove();
+            }
+        })
+    }
+</script>
 
 

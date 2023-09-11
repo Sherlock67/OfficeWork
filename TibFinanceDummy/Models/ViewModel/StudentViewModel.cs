@@ -19,6 +19,7 @@ namespace TibFinanceDummy.Models.ViewModel
         public string Std_Phone { get; set; }
         public string Std_Gender { get; set; }
         public string Std_BloodGroup { get; set; }
+        public int TotalData { get;set; }
 
     }
 }

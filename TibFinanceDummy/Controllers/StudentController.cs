@@ -43,7 +43,8 @@ namespace TibFinanceDummy.Controllers
                                   studentDetailInfo.Std_Mother_Name,
                                   studentDetailInfo.Std_Gender,
                                   studentDetailInfo.Std_Phone,
-                                  studentDetailInfo.Std_BloodGroup
+                                  studentDetailInfo.Std_BloodGroup,
+                                  TotalData=(db.Students.Count())
                               }).ToList().Skip((page - 1) * pageSize).Take(pageSize);
           
           // var pagedStudentList = studentList.Skip(skip).Take(pageSize);
