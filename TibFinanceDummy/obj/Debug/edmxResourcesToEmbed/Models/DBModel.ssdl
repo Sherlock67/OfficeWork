@@ -7,6 +7,14 @@
     <Property Name="DepartmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DepartmentName" Type="varchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="Grade">
+    <Key>
+      <PropertyRef Name="GradeId" />
+    </Key>
+    <Property Name="GradeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GradeName" Type="varchar" MaxLength="50" />
+    <Property Name="StudentId" Type="int" />
+  </EntityType>
   <EntityType Name="Student">
     <Key>
       <PropertyRef Name="StudentId" />
@@ -40,6 +48,7 @@
   </EntityType>
   <EntityContainer Name="tibfinancedummydbModelStoreContainer">
     <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Grade" EntityType="Self.Grade" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StudentDetailInfos" EntityType="Self.StudentDetailInfos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />

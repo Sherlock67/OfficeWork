@@ -22,6 +22,7 @@
     <EntitySet Name="Students" EntityType="Self.Student" />
     <EntitySet Name="Users" EntityType="tibfinancedummydbModel.User" />
     <EntitySet Name="StudentDetailInfos" EntityType="tibfinancedummydbModel.StudentDetailInfo" />
+    <EntitySet Name="Grades" EntityType="tibfinancedummydbModel.Grade" />
   </EntityContainer>
   <EntityType Name="User">
     <Key>
@@ -43,5 +44,13 @@
     <Property Name="Std_Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Std_Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Std_BloodGroup" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Grade">
+    <Key>
+      <PropertyRef Name="GradeId" />
+    </Key>
+    <Property Name="GradeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GradeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="StudentId" Type="Int32" />
   </EntityType>
 </Schema>

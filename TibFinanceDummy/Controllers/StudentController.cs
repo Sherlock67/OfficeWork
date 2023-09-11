@@ -2,10 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using TibFinanceDummy.Helper;
+using System.Web.UI;
 using TibFinanceDummy.Models;
 using TibFinanceDummy.Models.ViewModel;
 
@@ -21,8 +22,9 @@ namespace TibFinanceDummy.Controllers
             ViewBag.ListOfDepartment = new SelectList(departments, "DepartmentId", "DepartmentName");
             return View();
         }
-        public JsonResult GetStudentList(int pageNumber = 1, int pageSize = 20)
+        public JsonResult GetStudentList(int page = 1,int pageSize = 10)
         {
+            
             var studentList =( from student in db.Students
                               join department in db.Departments
                               on student.DepartmentId equals department.DepartmentId 
@@ -42,10 +44,14 @@ namespace TibFinanceDummy.Controllers
                                   studentDetailInfo.Std_Gender,
                                   studentDetailInfo.Std_Phone,
                                   studentDetailInfo.Std_BloodGroup
-                              }).ToList();
-            var pagedData = Pagination.PagedResult(studentList, pageNumber, pageSize);
-            return Json(pagedData, JsonRequestBehavior.AllowGet);
+                              }).ToList().Skip((page - 1) * pageSize).Take(pageSize);
+          
+          // var pagedStudentList = studentList.Skip(skip).Take(pageSize);
+          // var pagedStudentList = studentList.Skip(skip).Take(pageSize);
+
+            return Json(studentList, JsonRequestBehavior.AllowGet);
         }
+
         public JsonResult GetStudentById(int? studentId)
         {
             var singleStudent = (from student in db.Students
@@ -102,7 +108,7 @@ namespace TibFinanceDummy.Controllers
                     info.Std_Gender = studentViewModel.Std_Gender;
                     info.Std_BloodGroup = studentViewModel.Std_BloodGroup;
                 }
-            
+
                 result = true;
                 db.SaveChanges();
             }
@@ -123,7 +129,7 @@ namespace TibFinanceDummy.Controllers
                     Std_Phone = studentViewModel.Std_Phone,
                     Std_Mother_Name = studentViewModel.Std_Mother_Name,
                 };
-              
+
                 db.Students.Add(student);
                 db.StudentDetailInfos.Add(studentDetailInfo);
                 db.SaveChanges();

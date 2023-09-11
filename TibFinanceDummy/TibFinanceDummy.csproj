@@ -151,6 +151,9 @@
     <Compile Include="Models\Department.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Grade.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Student.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -237,6 +240,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Helper\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
