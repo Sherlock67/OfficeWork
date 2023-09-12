@@ -117,23 +117,8 @@ namespace TibFinanceDummy.Controllers
             }
             else
             {
-                var student = new Student()
-                {
-                    StudentName = studentViewModel.StudentName,
-                    Roll = studentViewModel.Roll,
-                    Address = studentViewModel.Address,
-                    DepartmentId = studentViewModel.DepartmentId,
-                    
-                };
-                var studentDetailInfo = new StudentDetailInfo()
-                {
-
-                    Std_BloodGroup = studentViewModel.Std_BloodGroup,
-                    Std_Father_Name = studentViewModel.Std_Father_Name,
-                    Std_Gender = studentViewModel.Std_Gender,
-                    Std_Phone = studentViewModel.Std_Phone,
-                    Std_Mother_Name = studentViewModel.Std_Mother_Name,
-                };
+               
+              
                 if (Request.Files.Count > 0)
                 {
                     try
@@ -154,6 +139,34 @@ namespace TibFinanceDummy.Controllers
                             }
                             fname = Path.Combine(Server.MapPath("~/Uploads/"), fname);
                             file.SaveAs(fname);
+                            Student studentImgObj = new Student()
+                            {
+                                
+                                ImagePath = fname
+
+                            };
+
+                            var student = new Student()
+                            {
+                                StudentName = studentViewModel.StudentName,
+                                Roll = studentViewModel.Roll,
+                                Address = studentViewModel.Address,
+                                DepartmentId = studentViewModel.DepartmentId,
+                                ImagePath = fname
+
+                            };
+                            var studentDetailInfo = new StudentDetailInfo()
+                            {
+
+                                Std_BloodGroup = studentViewModel.Std_BloodGroup,
+                                Std_Father_Name = studentViewModel.Std_Father_Name,
+                                Std_Gender = studentViewModel.Std_Gender,
+                                Std_Phone = studentViewModel.Std_Phone,
+                                Std_Mother_Name = studentViewModel.Std_Mother_Name,
+                            };
+                            db.Students.Add(student);
+                            db.StudentDetailInfos.Add(studentDetailInfo);
+                            db.SaveChanges();
                             return Json("File Uploaded Successfully!");
                         }
 
@@ -167,9 +180,9 @@ namespace TibFinanceDummy.Controllers
                 {
                     return Json("No files selected.");
                 }
-                db.Students.Add(student);
-                db.StudentDetailInfos.Add(studentDetailInfo);
-                db.SaveChanges();
+               // db.Students.Add(student);
+              
+                // db.SaveChanges();
                 result = true;
 
             }

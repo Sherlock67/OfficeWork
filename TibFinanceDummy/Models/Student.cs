@@ -21,7 +21,7 @@ namespace TibFinanceDummy.Models
         public Nullable<int> Roll { get; set; }
         public Nullable<int> DepartmentId { get; set; }
         public string ImagePath { get; set; }
-        public HttpPostedFileBase ImageFile { get; set; }
+        //public HttpPostedFileBase ImageFile { get; set; }
       //  public byte[] ImageByte { get; set; }
     }
 }
