@@ -29,6 +29,7 @@
           <Property Name="Address" Type="varchar" MaxLength="50" />
           <Property Name="Roll" Type="int" />
           <Property Name="DepartmentId" Type="int" />
+          <Property Name="ImagePath" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="StudentDetailInfos">
           <Key>
@@ -78,6 +79,7 @@
           <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Roll" Type="Int32" />
           <Property Name="DepartmentId" Type="Int32" />
+          <Property Name="ImagePath" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityContainer Name="tibfinancedummydbEntities4" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Departments" EntityType="Self.Department" />
@@ -132,6 +134,7 @@
           <EntitySetMapping Name="Students">
             <EntityTypeMapping TypeName="tibfinancedummydbModel.Student">
               <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
                 <ScalarProperty Name="StudentId" ColumnName="StudentId" />
                 <ScalarProperty Name="StudentName" ColumnName="StudentName" />
                 <ScalarProperty Name="Address" ColumnName="Address" />

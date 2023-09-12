@@ -42,7 +42,7 @@
                     <h4 id="ModalTitle"></h4>
                 </div>
                 <div class="modal-body">
-                    <form id="form">
+                    <form id="form" , enctype="multipart/form-data">
                         <fieldset id="SubmitForm">
                             @Html.HiddenFor(m => m.StudentId, new { @id = "StudentId" })
                             @Html.HiddenFor(m => m.Std_Other_Info_ID, new { @id = "Std_Other_Info_ID" })
@@ -73,6 +73,12 @@
                             <div class="form-group mt-2">
                                 @Html.DropDownListFor(m => m.DepartmentId, ViewBag.ListOfDepartment as SelectList, "--Select Dept--", new { @id = "DropDwn", @class = "form-control" })
                             </div>
+                            <div class="form-group mt-2">
+                                <input type="file" id="fileInput" name="fileInput">
+
+
+                            </div>
+
                             <div class="form-group mt-2">
                                 <a href="#" class="btn btn-block btn-danger" id="SaveStudentRecord">Save</a>
                             </div>
@@ -110,6 +116,7 @@
                 "<td>" + StudentList[i].Std_Phone + "</td>" +
                 "<td>" + StudentList[i].Std_Gender + "</td>" +
                 "<td>" + StudentList[i].DepartmentName + "</td>" +
+
                 "<td>" + "<a href='#' class='btn btn-warning' onclick='EditStudentRecord(" + StudentList[i].StudentId + ")' ><span class='glyphicon glyphicon-edit'></span>Edit</a>" + "</td>" +
                 "<td>" + "<a href='#' class='btn btn-danger' onclick='ConfirmDelete(" + StudentList[i].StudentId + ")'><span class='glyphicon glyphicon-trash'></span>Delete</a>" + "</td>" +
                 "</tr>";
@@ -168,20 +175,53 @@
         $("#form")[0].reset();
         $("#StudentId").val(0);
         $("#DropDwn option:selected").text("--Select Dept--");
-        //console.log('111')
         $("#ModalTitle").html("Add New Student");
         $("#MyModal").modal('show');
     }
-    $("#SaveStudentRecord").click(function () {
-        var data = $("#SubmitForm").serialize();
+    $(document).ready(function () {
+        $('#fileInput').change(function () {
+            var formData = new FormData();
+            var fileInput = $('#fileInput')[0];
+            formData.append('File', fileInput.files[0]);
+            formData.append('data', JSON.stringify(fileInput));
+            console.log(formData);
+            $.ajax({
+                url: '/Student/AddStudent',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    // Handle the success response
+                    console.log(response);
+                },
+                error: function (error) {
+                    // Handle the error response
+                    console.error(error);
+                }
+            });
+        });
+    });
+    $("#SaveStudentRecord").click(function (e) {
+        e.preventDefault();
+        var form = document.getElementById("form");
+        var formData = new FormData(form);
+        //formData.append('image', $("#fileInput")[0].files[0])
+        //for (var i = 0; i <= files.length; i++) {
+        //    formData.append(files[i].name, files[i]);
+        //}
+        console.log(formData);
         $.ajax({
-            type: "Post",
+
             url: "/Student/AddStudent",
-            data: data,
-            success: function (result) {
-                window.location.href = "/Student/Index";
-                $("#MyModal").modal("hide");
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                console.log(response);
             }
+
         })
     })
     function EditStudentRecord(StudentId) {

@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Drawing.Printing;
+using System.IO;
 using System.Linq;
+using System.Runtime.Versioning;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
@@ -121,23 +123,60 @@ namespace TibFinanceDummy.Controllers
                     Roll = studentViewModel.Roll,
                     Address = studentViewModel.Address,
                     DepartmentId = studentViewModel.DepartmentId,
+                    
                 };
                 var studentDetailInfo = new StudentDetailInfo()
                 {
+
                     Std_BloodGroup = studentViewModel.Std_BloodGroup,
                     Std_Father_Name = studentViewModel.Std_Father_Name,
                     Std_Gender = studentViewModel.Std_Gender,
                     Std_Phone = studentViewModel.Std_Phone,
                     Std_Mother_Name = studentViewModel.Std_Mother_Name,
                 };
+                if (Request.Files.Count > 0)
+                {
+                    try
+                    {
+                        HttpFileCollectionBase files = Request.Files;
+                        for (int i = 0; i < files.Count; i++)
+                        {
+                            HttpPostedFileBase file = files[i];
+                            string fname;
+                            if (Request.Browser.Browser.ToUpper() == "IE" || Request.Browser.Browser.ToUpper() == "INTERNETEXPLORER")
+                            {
+                                string[] testfiles = file.FileName.Split(new char[] { '\\' });
+                                fname = testfiles[testfiles.Length - 1];
+                            }
+                            else
+                            {
+                                fname = file.FileName;
+                            }
+                            fname = Path.Combine(Server.MapPath("~/Uploads/"), fname);
+                            file.SaveAs(fname);
+                            return Json("File Uploaded Successfully!");
+                        }
 
+                    }
+                    catch (Exception ex)
+                    {
+                        return Json("Error occurred. Error details: " + ex.Message);
+                    }
+                }
+                else
+                {
+                    return Json("No files selected.");
+                }
                 db.Students.Add(student);
                 db.StudentDetailInfos.Add(studentDetailInfo);
                 db.SaveChanges();
                 result = true;
+
             }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+            
+        
         public JsonResult DeleteStudentRecord(int StudentId)
         {
             bool result = false;

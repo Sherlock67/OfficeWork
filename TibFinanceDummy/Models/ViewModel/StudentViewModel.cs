@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 
@@ -19,7 +20,10 @@ namespace TibFinanceDummy.Models.ViewModel
         public string Std_Phone { get; set; }
         public string Std_Gender { get; set; }
         public string Std_BloodGroup { get; set; }
-        public int TotalData { get;set; }
+        public int TotalData { get; set; }
+       // public string ImagePath { get; set; }
+      //  public HttpPostedFileBase StudentImage { get; set; }
+        
 
     }
 }

@@ -12,6 +12,7 @@
     <EntitySetMapping Name="Students">
       <EntityTypeMapping TypeName="tibfinancedummydbModel.Student">
         <MappingFragment StoreEntitySet="Student">
+          <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
           <ScalarProperty Name="StudentId" ColumnName="StudentId" />
           <ScalarProperty Name="StudentName" ColumnName="StudentName" />
           <ScalarProperty Name="Address" ColumnName="Address" />

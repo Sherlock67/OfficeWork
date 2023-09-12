@@ -1,0 +1,155 @@
+﻿﻿@model TibFinanceDummy.Models.ViewModel.GradeViewModel
+@{
+    Layout = null;
+}
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+
+<h2 class="m-5">Grade List</h2>
+<div class="container" style="margin-top:3%">
+    <a href="#" class="btn btn-info" onclick="AddNewGrade()">Add New Grade</a> <br /><br />
+
+    <table id="studentTable" class="table table-striped">
+        <thead>
+            <tr>
+                <th>Grade ID</th>
+                <th>Grade Name</th>
+                <th>Student Name</th>
+                <th>Action(Edit)</th>
+                <th>Action(Delete)</th>
+
+            </tr>
+        </thead>
+        <tbody id="SetGradeStudentList">
+            <tr id="LoadingStatus" style="color:red"></tr>
+        </tbody>
+    </table>
+    <div id="page" class="text-center">
+
+    </div>
+    <div class="modal fade" id="MyModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a href="#" class="close" data-dismiss="modal">&times;</a>
+                    <h4 id="ModalTitle"></h4>
+                </div>
+                <div class="modal-body">
+                    <form id="form">
+                        <fieldset id="SubmitForm">
+                            @Html.HiddenFor(m => m.StudentId, new { @id = "StudentId" })
+                            @Html.HiddenFor(m => m.GradeId, new { @id = "GradeId" })
+                            <div class="form-group mt-2">
+                                @Html.TextBoxFor(m => m.GradeName, new { @id = "GradeName", @class = "form-control", @placeholder = "GradeName" })
+                            </div>
+                            <div class="form-group mt-2">
+                                @Html.DropDownListFor(m => m.StudentId, ViewBag.ListOfStudent as SelectList, "--Select Student--", new { @id = "DropDwn", @class = "form-control" })
+                            </div>
+
+                            <div class="form-group mt-2">
+                                <a href="#" class="btn btn-block btn-danger" id="SaveGradeRecord">Save</a>
+                            </div>
+
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    let pageIndex = 1; let pageSize = 5;
+    $.get("/Grade/GetGradesAndStudent?page=" + pageIndex + "&&pageSize=" + pageSize + "", null, GetAllStudentsByGrade);
+    function onPaging(pageIndex, pageSize) {
+        var SetData = $("#SetGradeStudentList");
+        SetData.html('');
+        $.get("/Grade/GetGradesAndStudent?page=" + pageIndex + "&&pageSize=" + pageSize + "", null, GetAllStudentsByGrade);
+    }
+    function GetAllStudentsByGrade(GradeAndStudentList) {
+        var SetData = $("#SetGradeStudentList");
+        for (var i = 0; i < GradeAndStudentList.length; i++) {
+            var Data = "<tr class='row_" + GradeAndStudentList[i].GradeId + "'>" +
+                "<td>" + GradeAndStudentList[i].GradeId + "</td>" +
+                "<td>" + GradeAndStudentList[i].GradeName + "</td>" +
+                "<td>" + GradeAndStudentList[i].StudentName + "</td>" +
+                "<td>" + "<a href='#' class='btn btn-warning' onclick='EditStudentRecord(" + GradeAndStudentList[i].GradeId + ")' ><span class='glyphicon glyphicon-edit'></span>Edit</a>" + "</td>" +
+                "<td>" + "<a href='#' class='btn btn-danger' onclick='ConfirmDelete(" + GradeAndStudentList[i].GradeId + ")'><span class='glyphicon glyphicon-trash'></span>Delete</a>" + "</td>" +
+                "</tr>";
+            SetData.append(Data);
+        }
+        var paginationContainer = $("#page")[0];
+        if (GradeAndStudentList.length > 0) {
+            if (GradeAndStudentList[0].TotalData > pageSize)
+                paginate(StudentList, 5, paginationContainer);
+        }
+    }
+    function paginate(items, itemsPerPage, paginationContainer) {
+
+        let currentPage = 1;
+        const totalPages = Math.ceil(items[0].TotalData / itemsPerPage);
+
+
+
+        function setupPagination() {
+            const pagination = $("#page")[0];
+            pagination.innerHTML = "";
+
+            for (let i = 1; i <= totalPages; i++) {
+                const link = document.createElement("a");
+
+                link.href = "#";
+                link.innerText = i;
+                link.classList.add("m-2")
+                if (i === currentPage) {
+                    link.classList.add("active");
+                }
+
+                link.addEventListener("click", (event) => {
+                    event.preventDefault();
+                    currentPage = i;
+                    onPaging(currentPage, 5)
+                    const currentActive = pagination.querySelector(".active");
+                    currentActive.classList.remove("active");
+                    link.classList.add("active");
+                });
+
+                pagination.appendChild(link);
+            }
+        }
+
+
+        setupPagination();
+    }
+    function AddNewGrade() {
+        $("#form")[0].reset();
+        $("#GradeId").val(0);
+        $("#DropDwn option:selected").text("--Select Student--");
+        //console.log('111')
+        $("#ModalTitle").html("Add New Student");
+        $("#MyModal").modal('show');
+    }
+    $("#SaveGradeRecord").click(function () {
+        var data = $("#SubmitForm").serialize();
+        $.ajax({
+            type: "Post",
+            url: "/Grade/AddGrade",
+            data: data,
+            success: function (result) {
+                window.location.href = "/Grade/Index";
+                $("#MyModal").modal("hide");
+            }
+        })
+    })
+    var ConfirmDelete = function (GradeId) {
+        var StuId = $("#GradeId").val();
+        $.ajax({
+            type: "POST",
+            url: "/Grade/DeleteGradeRecord?GradeId=" + GradeId,
+            success: function (result) {
+                $(".row_" + GradeId).remove();
+            }
+        })
+    }
+</script>

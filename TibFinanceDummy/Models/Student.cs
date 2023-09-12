@@ -11,7 +11,8 @@ namespace TibFinanceDummy.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Web;
+
     public partial class Student
     {
         public int StudentId { get; set; }
@@ -19,5 +20,8 @@ namespace TibFinanceDummy.Models
         public string Address { get; set; }
         public Nullable<int> Roll { get; set; }
         public Nullable<int> DepartmentId { get; set; }
+        public string ImagePath { get; set; }
+        public HttpPostedFileBase ImageFile { get; set; }
+      //  public byte[] ImageByte { get; set; }
     }
 }

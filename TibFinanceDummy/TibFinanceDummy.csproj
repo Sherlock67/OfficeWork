@@ -164,6 +164,7 @@
     <Compile Include="Models\User.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModel\GradeViewModel.cs" />
     <Compile Include="Models\ViewModel\StudentViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -238,11 +239,12 @@
     <Content Include="Views\Student\Index.cshtml" />
     <Content Include="Views\Student\Register.cshtml" />
     <Content Include="Views\Student\Login.cshtml" />
+    <Content Include="Views\Grade\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Helper\" />
-    <Folder Include="Views\Grade\" />
+    <Folder Include="Uploads\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>

@@ -16,6 +16,7 @@
     <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Roll" Type="Int32" />
     <Property Name="DepartmentId" Type="Int32" />
+    <Property Name="ImagePath" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityContainer Name="tibfinancedummydbEntities4" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Departments" EntityType="Self.Department" />

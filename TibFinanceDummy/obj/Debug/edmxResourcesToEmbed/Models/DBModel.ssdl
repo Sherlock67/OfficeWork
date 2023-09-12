@@ -24,6 +24,7 @@
     <Property Name="Address" Type="varchar" MaxLength="50" />
     <Property Name="Roll" Type="int" />
     <Property Name="DepartmentId" Type="int" />
+    <Property Name="ImagePath" Type="varchar" MaxLength="255" />
   </EntityType>
   <EntityType Name="StudentDetailInfos">
     <Key>
