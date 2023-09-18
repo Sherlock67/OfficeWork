@@ -11,7 +11,7 @@ namespace TibFinanceDummy.Controllers
     public class GradeController : Controller
     {
         // GET: Grade
-        tibfinancedummydbEntities4 db = new tibfinancedummydbEntities4();
+        Model1 db = new Model1();
         public ActionResult Index()
         {
             List<Student> students = db.Students.ToList();

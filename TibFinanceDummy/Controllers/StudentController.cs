@@ -2,13 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
-using System.Runtime.Versioning;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.UI;
 using TibFinanceDummy.Models;
 using TibFinanceDummy.Models.ViewModel;
 
@@ -16,7 +13,7 @@ namespace TibFinanceDummy.Controllers
 {
     public class StudentController : Controller
     {
-        tibfinancedummydbEntities4 db = new tibfinancedummydbEntities4();
+        Model1 db = new Model1();
         // GET: Student
         public ActionResult Index()
         {
@@ -89,6 +86,8 @@ namespace TibFinanceDummy.Controllers
 
         public JsonResult AddStudent(StudentViewModel studentViewModel)
         {
+           
+
             var result = false;
             if (studentViewModel.StudentId > 0)
             {
@@ -117,8 +116,6 @@ namespace TibFinanceDummy.Controllers
             }
             else
             {
-               
-              
                 if (Request.Files.Count > 0)
                 {
                     try
@@ -141,11 +138,8 @@ namespace TibFinanceDummy.Controllers
                             file.SaveAs(fname);
                             Student studentImgObj = new Student()
                             {
-                                
                                 ImagePath = fname
-
                             };
-
                             var student = new Student()
                             {
                                 StudentName = studentViewModel.StudentName,
@@ -157,7 +151,6 @@ namespace TibFinanceDummy.Controllers
                             };
                             var studentDetailInfo = new StudentDetailInfo()
                             {
-
                                 Std_BloodGroup = studentViewModel.Std_BloodGroup,
                                 Std_Father_Name = studentViewModel.Std_Father_Name,
                                 Std_Gender = studentViewModel.Std_Gender,
@@ -169,7 +162,6 @@ namespace TibFinanceDummy.Controllers
                             db.SaveChanges();
                             return Json("File Uploaded Successfully!");
                         }
-
                     }
                     catch (Exception ex)
                     {
@@ -180,16 +172,10 @@ namespace TibFinanceDummy.Controllers
                 {
                     return Json("No files selected.");
                 }
-               // db.Students.Add(student);
-              
-                // db.SaveChanges();
                 result = true;
-
             }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-            
-        
         public JsonResult DeleteStudentRecord(int StudentId)
         {
             bool result = false;

@@ -1,0 +1,14 @@
+C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceDataAccess\bin\Debug\TibFinanceDataAccess.dll.config
+C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceDataAccess\bin\Debug\TibFinanceDataAccess.dll
+C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceDataAccess\bin\Debug\TibFinanceDataAccess.pdb
+C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceDataAccess\bin\Debug\EntityFramework.dll
+C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceDataAccess\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceDataAccess\bin\Debug\EntityFramework.xml
+C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceDataAccess\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceDataAccess\obj\Debug\TibFinanceDataAccess.csproj.AssemblyReference.cache
+C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceDataAccess\obj\Debug\TibFinanceDataAccess.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceDataAccess\obj\Debug\TibFinanceDataAccess.csproj.CopyComplete
+C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceDataAccess\obj\Debug\TibFinanceDataAccess.dll
+C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceDataAccess\obj\Debug\TibFinanceDataAccess.pdb
+C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceDataAccess\obj\Debug\TibFinanceDataAccess.Migrations.ApplyPreviousmigrationintodataaccessproject.resources
+C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceDataAccess\obj\Debug\TibFinanceDataAccess.csproj.GenerateResource.cache
