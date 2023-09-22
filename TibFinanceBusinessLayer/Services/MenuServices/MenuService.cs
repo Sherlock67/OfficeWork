@@ -8,14 +8,17 @@ using TibFinanceDataAccess.Interface.Modules;
 using TibFinanceDataAccess.Models;
 using TibFinanceDataAccess.Repository.MenusRepository;
 using TibFinanceDataAccess.Repository.ModuleRepository;
+using TibFinanceShared.ViewModels;
 
 namespace TibFinanceBusinessLayer.Services.MenuServices
 {
     public class MenuService
     {
         private IMenu menuRepository = null;
+        private IModule moduleRepository = null;
         public MenuService() 
         {
+            moduleRepository = new ModuleRepository();
             menuRepository = new MenuRepository();
         }
         public Menu CreateMenu(Menu module)
@@ -40,11 +43,30 @@ namespace TibFinanceBusinessLayer.Services.MenuServices
             }
             //throw new NotImplementedException();
         }
-        public IEnumerable<Menu> GetAllMenus()
+        public IEnumerable<vmModuleMenu> GetAllMenus()
         {
             try
             {
-                return menuRepository.GetAll().ToList();
+                var menus = menuRepository.GetAll().ToList();
+                var modules = moduleRepository.GetAll().ToList();
+                var vmModuleMenuList = (from module in modules
+                                        join menu in menus
+                                              on module.ModuleId equals menu.ModuleId into modulemenu
+                                        from modulemenus in modulemenu.DefaultIfEmpty()
+                                        select new vmModuleMenu()
+                                        {
+                                            MenuName = modulemenus.MenuName,
+                                            ModuleId = modulemenus.ModuleId,
+                                            ModuleName = module.ModuleName,
+                                            MenuDescription = modulemenus.MenuDescription,
+                                            CreatedBy = modulemenus.CreatedBy,
+                                            UpdatedBy = modulemenus.UpdatedBy,
+                                            MenuId = modulemenus.MenuId,
+
+
+                                        }).ToList();
+                return vmModuleMenuList;
+              //  return menuRepository.GetAll().ToList();
             }
             catch (Exception ex)
             {

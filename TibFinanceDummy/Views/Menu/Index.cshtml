@@ -19,7 +19,8 @@
             <th>Menu Description</th>
             <th>Created By</th>
             <th>Updated by</th>
-            <th>Action</th>
+            <th>Module Name</th>
+            <th class="text-center m-5">Action</th>
         </tr>
     </thead>
     <tbody id="SetMenuList">
@@ -76,10 +77,14 @@
                 "<td>" + MenuList[i].MenuDescription + "</td>" +
                 "<td>" + MenuList[i].CreatedBy + "</td>" +
                 "<td>" + MenuList[i].UpdatedBy + "</td>" +
-           
-                "<td>" + "<a href='#' class='btn btn-warning' onclick='EditMenu(" + MenuList[i].MenuId + ")' ><span class='glyphicon glyphicon-edit'></span>Edit</a>" + "</td>" +
-                "<td>" + "<a href='#' class='btn btn-danger' onclick='ConfirmDelete(" + MenuList[i].MenuId + ")'><span class='glyphicon glyphicon-trash'></span>Delete</a>" + "</td>" +
-                "</tr>";
+                "<td>" + MenuList[i].ModuleName + "</td>" +
+                
+                "<td>" + "<a href='#' class=' btn-sm btn-warning' onclick='EditModule(" + MenuList[i].ModuleId + ")' ><span class='glyphicon glyphicon-edit'></span>Edit</a>" +
+                "<a href='#' class='mx-2 btn-sm btn-danger' onclick='ConfirmDelete(" + MenuList[i].ModuleId + ")'><span class='glyphicon glyphicon-trash'></span>Delete</a>"
+                
+            "</td>"
+            "</tr>";
+              
 
             console.log(Data);
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TibFinance.Shared.ViewModels;
+using TibFinanceShared.ViewModels;
 using TibFinanceDataAccess.Interface.Menus;
 using TibFinanceDataAccess.Interface.Modules;
 using TibFinanceDataAccess.Models;
@@ -87,7 +87,10 @@ namespace TibFinanceBusinessLayer.Services.ModuleServices
         {
             try
             {
-               
+                Menu menu = new Menu();
+                var singleModule = _moduleRepository.GetById(module.ModuleId);
+                var singleMenu = _menuRepository.GetById(menu.MenuId);
+
                 _moduleRepository.Update(module);
             }
             catch (Exception ex)

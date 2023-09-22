@@ -328,6 +328,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\ModuleController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="Global.asax.cs">
@@ -2451,6 +2452,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Helper\" />
     <Folder Include="Uploads\" />
+    <Folder Include="Views\Role\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

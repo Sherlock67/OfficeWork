@@ -1,5 +1,4 @@
-﻿﻿﻿@model TibFinanceDataAccess.Models.Module
-
+﻿﻿﻿@model TibFinanceShared.ViewModels.vmModuleMenu
 @{
     ViewBag.Title = "Index";
 }
@@ -23,8 +22,8 @@
             <th>Module Name</th>
             <th>Created By</th>
             <th>Updated by</th>
-            <th>Menu Name</th>
-            <th>Action</th>
+          
+            <th class="text-center mx-5">Action</th>
         </tr>
     </thead>
     <tbody id="SetModuleList">
@@ -51,7 +50,10 @@
                         <div class="form-group mt-2">
                             @Html.TextBoxFor(m => m.UpdatedBy, new { @id = "UpdatedBy", @class = "form-control", @placeholder = "Address" })
                         </div>
-                     
+                        @*<div class="form-group mt-2">
+                            @Html.DropDownListFor(m => m.ModuleId, ViewBag.ListOfMenu as SelectList, "--Select Module--", new { @id = "DropDwn", @class = "form-control" })
+                        </div>*@
+
                         <div class="form-group mt-2">
                             <a href="#" class="btn btn-block btn-danger" id="SaveModule">Create Module</a>
                         </div>
@@ -73,13 +75,16 @@
                 "<td>" + ModuleList[i].ModuleName + "</td>" +
                 "<td>" + ModuleList[i].CreatedBy + "</td>" +
                 "<td>" + ModuleList[i].UpdatedBy + "</td>" +
-                "<td>" + ModuleList[i].MenuName + "</td>" +
-                "<td>" + "<a href='#' class='btn btn-warning' onclick='EditModule(" + ModuleList[i].ModuleId + ")' ><span class='glyphicon glyphicon-edit'></span>Edit</a>" + "</td>" +
-                "<td>" + "<a href='#' class='btn btn-danger' onclick='ConfirmDelete(" + ModuleList[i].ModuleId + ")'><span class='glyphicon glyphicon-trash'></span>Delete</a>" + "</td>" +
+               
+                "<td>" + "<a href='#' class='btn-sm btn-warning' onclick='EditModule(" + ModuleList[i].ModuleId + ")' ><span class='glyphicon glyphicon-edit'></span>Edit</a>" +
+                "<a href='#' class='mx-2 btn-sm btn-danger' onclick='ConfirmDelete(" + ModuleList[i].ModuleId + ")'><span class='glyphicon glyphicon-trash'></span>Delete</a>"
+                +
+                "</td>"
+           
+                
                 "</tr>";
                
             console.log(Data);
-
             SetData.append(Data);
 
         }
@@ -87,7 +92,7 @@
     function AddNewModule() {
         $("#form")[0].reset();
         $("#ModuleId").val(0);
-        $("#DropDwn option:selected").text("--Select Menu--");
+       // $("#DropDwn option:selected").text("--Select Menu--");
         $("#ModalTitle").html("Add New Module");
         $("#MyModal").modal('show');
     }
@@ -125,8 +130,8 @@
                 $("#ModuleName").val(obj.ModuleName);
                 $("#CreatedBy").val(obj.CreatedBy);
                 $("#UpdatedBy").val(obj.UpdatedBy);
-                $("#DropDwn option:selected").text(obj.MenuName);
-                $("#DropDwn option:selected").val(obj.MenuId);
+                //$("#DropDwn option:selected").text(obj.MenuName);
+                //$("#DropDwn option:selected").val(obj.MenuId);
             }
         })
     }
