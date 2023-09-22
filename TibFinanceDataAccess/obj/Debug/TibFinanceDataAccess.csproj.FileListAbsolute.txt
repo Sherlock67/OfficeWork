@@ -16,9 +16,10 @@ C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceDataAccess\obj\Deb
 C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceDataAccess\obj\Debug\TibFinanceDataAccess.Migrations.Moduletablemigrations.resources
 C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceDataAccess\obj\Debug\TibFinanceDataAccess.Migrations.Moduletableandmenutableforeignkeyintergation.resources
 C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceDataAccess\obj\Debug\TibFinanceDataAccess.Migrations.moduleandmenudatatableschemaupdate.resources
+C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceDataAccess\obj\Debug\TibFinanceDataAccess.Migrations.Roletablemigrations.resources
 C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceDataAccess\obj\Debug\TibFinanceDataAccess.csproj.GenerateResource.cache
 C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceDataAccess\obj\Debug\TibFinanceDataAccess.csproj.CoreCompileInputs.cache
 C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceDataAccess\obj\Debug\TibFinanceDataAccess.csproj.CopyComplete
 C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceDataAccess\obj\Debug\TibFinanceDataAccess.dll
 C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceDataAccess\obj\Debug\TibFinanceDataAccess.pdb
-C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceDataAccess\obj\Debug\TibFinanceDataAccess.Migrations.Roletablemigrations.resources
+C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceDataAccess\obj\Debug\TibFinanceDataAccess.Migrations.UserandRolerelationship.resources

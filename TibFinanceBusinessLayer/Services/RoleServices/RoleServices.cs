@@ -26,7 +26,7 @@ namespace TibFinanceBusinessLayer.Services.RoleServices
         {
             return roleRepository.Create(role);
         }
-        public bool DeleteModule(int id)
+        public bool DeleteRole(int id)
         {
             try
             {
@@ -60,7 +60,7 @@ namespace TibFinanceBusinessLayer.Services.RoleServices
 
             //  throw new NotImplementedException();
         }
-        public void UpdateModule(Role role)
+        public void UpdateRole(Role role)
         {
             try
             {

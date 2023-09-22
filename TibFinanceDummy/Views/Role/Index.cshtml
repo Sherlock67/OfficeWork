@@ -1,0 +1,126 @@
+﻿@model TibFinanceDataAccess.Models.Role
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Role List</h2>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<div class="mt-5">
+    <a href="#" class="btn btn-info" onclick="AddNewRole()">Add New Role</a>
+</div>
+<table id="roleTable" class="table table-striped">
+    <thead>
+        <tr>
+            <th>Menu Id</th>
+            <th>Role Name</th>
+            <th class="text-center m-5">Action</th>
+        </tr>
+    </thead>
+    <tbody id="SetRoleList">
+    </tbody>
+</table>
+
+<div class="modal fade" id="MyModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h4 id="ModalTitle"></h4>
+            </div>
+            <div class="modal-body">
+                <form id="form">
+                    <fieldset id="SubmitForm">
+                        @Html.HiddenFor(m => m.RoleId, new { @id = "RoleId" })
+
+                        <div class="form-group mt-2">
+                            @Html.TextBoxFor(m => m.RoleName, new { @id = "RoleName", @class = "form-control", @placeholder = "RoleName" })
+                        </div>
+                        <div class="form-group mt-2">
+                            <a href="#" class="btn btn-block btn-danger" id="SaveRole">Create Role</a>
+                        </div>
+
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    
+    
+    $.get("/Role/GetUserRoles", null, GetRoles);
+    function GetRoles(RoleList) {
+        var SetData = $("#SetRoleList");
+        console.log(RoleList);
+        for (var i = 0; i < RoleList.length; i++) {
+            var Data = "<tr class='row_" + RoleList[i].RoleId + "'>" +
+                "<td>" + RoleList[i].RoleId + "</td>" +
+                "<td>" + RoleList[i].RoleName + "</td>" +
+               
+
+                "<td>" + "<a href='#' class=' btn-sm btn-warning' onclick='EditRole(" + RoleList[i].RoleId + ")' ><span class='glyphicon glyphicon-edit'></span>Edit</a>" +
+                "<a href='#' class='mx-2 btn-sm btn-danger' onclick='ConfirmDelete(" + RoleList[i].RoleId + ")'><span class='glyphicon glyphicon-trash'></span>Delete</a>"
+
+            "</td>"
+            "</tr>";
+            console.log(Data);
+
+            SetData.append(Data);
+
+        }
+
+    }
+    function AddNewRole() {
+        $("#form")[0].reset();
+        $("#RoleId").val(0);
+       
+        $("#ModalTitle").html("Add New Role");
+        $("#MyModal").modal('show');
+    }
+    $("#SaveRole").click(function (e) {
+        e.preventDefault();
+        var form = document.getElementById("form");
+        var formData = new FormData(form);
+
+        console.log(formData);
+        $.ajax({
+
+            url: "/Role/AddOrEditRole",
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                console.log(response);
+            }
+
+        })
+    })
+    function EditRole(RoleId) {
+        var url = "/Role/GetRoleId?RoleId=" + RoleId;
+        $("#ModalTitle").html("Update Role Record");
+        $("#MyModal").modal('show');
+        $.ajax({
+            type: "GET",
+            url: url,
+            success: function (data) {
+                var obj = JSON.parse(data);
+                $("#RoleId").val(obj.RoleId);
+                $("#RoleName").val(obj.RoleName);
+            }
+        })
+    }
+    var ConfirmDelete = function (RoleId) {
+        var roleId = $("#RoleId").val();
+        $.ajax({
+            type: "POST",
+            url: "/Role/DeleteRole?RoleId=" + RoleId,
+            success: function (result) {
+                $(".row_" + RoleId).remove();
+            }
+        })
+    }
+</script>
