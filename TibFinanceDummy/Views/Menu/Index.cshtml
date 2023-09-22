@@ -1,0 +1,147 @@
+﻿@model TibFinanceDataAccess.Models.Menu
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Menu List</h2>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<div class="mt-5">
+    <a href="#" class="btn btn-info" onclick="AddNewMenu()">Add New Menu</a>
+</div>
+
+<table id="menuTable" class="table table-striped">
+    <thead>
+        <tr>
+            <th>Menu Id</th>
+            <th>Menu Name</th>
+            <th>Menu Description</th>
+            <th>Created By</th>
+            <th>Updated by</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody id="SetMenuList">
+    </tbody>
+</table>
+
+<div class="modal fade" id="MyModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h4 id="ModalTitle"></h4>
+            </div>
+            <div class="modal-body">
+                <form id="form">
+                    <fieldset id="SubmitForm">
+                        @Html.HiddenFor(m => m.MenuId, new { @id = "MenuId" })
+
+                        <div class="form-group mt-2">
+                            @Html.TextBoxFor(m => m.MenuName, new { @id = "MenuName", @class = "form-control", @placeholder = "MenuName" })
+                        </div>
+                        <div class="form-group mt-2">
+                            @Html.TextBoxFor(m => m.MenuDescription, new { @id = "MenuDescription", @class = "form-control", @placeholder = "MenuDescription" })
+                        </div>
+                        <div class="form-group mt-2">
+                            @Html.TextBoxFor(m => m.CreatedBy, new { @id = "CreatedBy", @class = "form-control", @placeholder = "CreatedBy" })
+                        </div>
+                        <div class="form-group mt-2">
+                            @Html.TextBoxFor(m => m.UpdatedBy, new { @id = "UpdatedBy", @class = "form-control", @placeholder = "UpdatedBy" })
+                        </div>
+                        <div class="form-group mt-2">
+                            @Html.DropDownListFor(m => m.ModuleId, ViewBag.ListOfModule as SelectList, "--Select Module--", new { @id = "DropDwn", @class = "form-control" })
+                        </div>
+                        <div class="form-group mt-2">
+                            <a href="#" class="btn btn-block btn-danger" id="SaveMenu">Create Menu</a>
+                        </div>
+
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $.get("/Menu/GetAllMenus", null, GetMenus);
+    function GetMenus(MenuList)
+    {
+        var SetData = $("#SetMenuList");
+        console.log(MenuList);
+        for (var i = 0; i < MenuList.length; i++) {
+            var Data = "<tr class='row_" + MenuList[i].MenuId + "'>" +
+                "<td>" + MenuList[i].MenuId + "</td>" +
+                "<td>" + MenuList[i].MenuName + "</td>" +
+                "<td>" + MenuList[i].MenuDescription + "</td>" +
+                "<td>" + MenuList[i].CreatedBy + "</td>" +
+                "<td>" + MenuList[i].UpdatedBy + "</td>" +
+           
+                "<td>" + "<a href='#' class='btn btn-warning' onclick='EditMenu(" + MenuList[i].MenuId + ")' ><span class='glyphicon glyphicon-edit'></span>Edit</a>" + "</td>" +
+                "<td>" + "<a href='#' class='btn btn-danger' onclick='ConfirmDelete(" + MenuList[i].MenuId + ")'><span class='glyphicon glyphicon-trash'></span>Delete</a>" + "</td>" +
+                "</tr>";
+
+            console.log(Data);
+
+            SetData.append(Data);
+
+        }
+
+    }
+    function AddNewMenu() {
+        $("#form")[0].reset();
+        $("#MenuId").val(0);
+        $("#DropDwn option:selected").text("--Select Module--");
+        $("#ModalTitle").html("Add New Menu");
+        $("#MyModal").modal('show');
+    }
+    $("#SaveMenu").click(function (e) {
+        e.preventDefault();
+        var form = document.getElementById("form");
+        var formData = new FormData(form);
+
+        console.log(formData);
+        $.ajax({
+
+            url: "/Menu/AddOrEditMenu",
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                console.log(response);
+            }
+
+        })
+    })
+    function EditMenu(MenuId) {
+        var url = "/Menu/GetMenuId?MenuId=" + MenuId;
+        $("#ModalTitle").html("Update Menu Record");
+        $("#MyModal").modal('show');
+        $.ajax({
+            type: "GET",
+            url: url,
+            success: function (data) {
+                var obj = JSON.parse(data);
+                $("#MenuId").val(obj.MenuId);
+                $("#MenuName").val(obj.MenuName);
+                $("#MenuDescription").val(obj.MenuDescription);
+                $("#CreatedBy").val(obj.CreatedBy);
+                $("#UpdatedBy").val(obj.UpdatedBy);
+                $("#DropDwn option:selected").text(obj.ModuleName);
+                $("#DropDwn option:selected").val(obj.ModuleId);
+
+            }
+        })
+    }
+    var ConfirmDelete = function (MenuId) {
+        var menuId = $("#MenuId").val();
+        $.ajax({
+            type: "POST",
+            url: "/Menu/DeleteMenu?MenuId=" + MenuId,
+            success: function (result) {
+                $(".row_" + MenuId).remove();
+            }
+        })
+    }
+</script>

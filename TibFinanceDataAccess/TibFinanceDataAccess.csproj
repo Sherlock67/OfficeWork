@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=10.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.10.0.0\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -54,35 +57,85 @@
     <Compile Include="ApplicationDbContext.cs" />
     <Compile Include="Interface\Base\IBaseRepository.cs" />
     <Compile Include="Interface\Customers\ICustomer.cs" />
+    <Compile Include="Interface\Login\ILogin.cs" />
+    <Compile Include="Interface\Menus\IMenu.cs" />
+    <Compile Include="Interface\Modules\IModule.cs" />
     <Compile Include="Migrations\202309180704301_ApplyPrevious migration into dataaccess project.cs" />
     <Compile Include="Migrations\202309180704301_ApplyPrevious migration into dataaccess project.designer.cs">
       <DependentUpon>202309180704301_ApplyPrevious migration into dataaccess project.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202309200959242_User Login Table.cs" />
+    <Compile Include="Migrations\202309200959242_User Login Table.designer.cs">
+      <DependentUpon>202309200959242_User Login Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202309201035105_UserTable property type change.cs" />
+    <Compile Include="Migrations\202309201035105_UserTable property type change.designer.cs">
+      <DependentUpon>202309201035105_UserTable property type change.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202309210429326_Module table migrations.cs" />
+    <Compile Include="Migrations\202309210429326_Module table migrations.designer.cs">
+      <DependentUpon>202309210429326_Module table migrations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202309211102261_Module table and menu table foreign key intergation.cs" />
+    <Compile Include="Migrations\202309211102261_Module table and menu table foreign key intergation.designer.cs">
+      <DependentUpon>202309211102261_Module table and menu table foreign key intergation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202309211306324_module and menu datatable schema update.cs" />
+    <Compile Include="Migrations\202309211306324_module and menu datatable schema update.designer.cs">
+      <DependentUpon>202309211306324_module and menu datatable schema update.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Grade.cs" />
+    <Compile Include="Models\Menu.cs" />
     <Compile Include="Models\Model1.cs" />
+    <Compile Include="Models\Module.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\StudentDetailInfo.cs" />
-    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserLogin.cs" />
     <Compile Include="Models\ViewModel\GradeViewModel.cs" />
     <Compile Include="Models\ViewModel\StudentViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\CustomerRepository.cs" />
+    <Compile Include="Repository\CustomerRepository\CustomerRepository.cs" />
+    <Compile Include="Repository\LoginRepository\LoginRepository.cs" />
+    <Compile Include="Repository\MenusRepository\MenuRepository.cs" />
+    <Compile Include="Repository\ModuleRepository\ModuleRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Mapper\" />
     <Folder Include="Models\CodeFirst\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202309180704301_ApplyPrevious migration into dataaccess project.resx">
       <DependentUpon>202309180704301_ApplyPrevious migration into dataaccess project.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202309200959242_User Login Table.resx">
+      <DependentUpon>202309200959242_User Login Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202309201035105_UserTable property type change.resx">
+      <DependentUpon>202309201035105_UserTable property type change.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202309210429326_Module table migrations.resx">
+      <DependentUpon>202309210429326_Module table migrations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202309211102261_Module table and menu table foreign key intergation.resx">
+      <DependentUpon>202309211102261_Module table and menu table foreign key intergation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202309211306324_module and menu datatable schema update.resx">
+      <DependentUpon>202309211306324_module and menu datatable schema update.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TibFinance.Shared\TibFinanceShared.csproj">
+      <Project>{76ff5593-1ae5-4f6a-89d0-9a2f0cdb8a7c}</Project>
+      <Name>TibFinanceShared</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

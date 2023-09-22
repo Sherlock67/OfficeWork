@@ -12,7 +12,7 @@ namespace TibFinanceDataAccess.Interface.Base
          void Update(T entity);
 
          IEnumerable<T> GetAll();
-         T GetById(int Id);
+         T GetById(int? Id);
          void Delete(T entity);
     }
 }

@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TibFinanceDummy", "TibFinan
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TibFinanceDataAccess", "TibFinanceDataAccess\TibFinanceDataAccess.csproj", "{726D9581-407B-4961-BA48-C7590785BA33}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TibFinanceShared", "TibFinance.Shared\TibFinanceShared.csproj", "{76FF5593-1AE5-4F6A-89D0-9A2F0CDB8A7C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TibFinanceBusinessLayer", "TibFinanceBusinessLayer\TibFinanceBusinessLayer.csproj", "{4DE0E2A0-9A1C-4FA3-834F-99DAB6280627}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{726D9581-407B-4961-BA48-C7590785BA33}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{726D9581-407B-4961-BA48-C7590785BA33}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{726D9581-407B-4961-BA48-C7590785BA33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76FF5593-1AE5-4F6A-89D0-9A2F0CDB8A7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76FF5593-1AE5-4F6A-89D0-9A2F0CDB8A7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76FF5593-1AE5-4F6A-89D0-9A2F0CDB8A7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76FF5593-1AE5-4F6A-89D0-9A2F0CDB8A7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DE0E2A0-9A1C-4FA3-834F-99DAB6280627}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DE0E2A0-9A1C-4FA3-834F-99DAB6280627}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DE0E2A0-9A1C-4FA3-834F-99DAB6280627}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DE0E2A0-9A1C-4FA3-834F-99DAB6280627}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

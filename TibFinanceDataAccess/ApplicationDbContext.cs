@@ -11,5 +11,8 @@ namespace TibFinanceDataAccess
         }
         public DbSet<Course> Course { get; set; }   
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<UserLogin> Logins { get; set; }
+        public DbSet<Module> Modules { get; set; }
+        public DbSet<Menu> Menus { get; set; }
     }
 }

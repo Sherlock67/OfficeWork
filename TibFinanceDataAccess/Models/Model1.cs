@@ -11,12 +11,12 @@ namespace TibFinanceDataAccess.Models
             : base("name=Model1")
         {
         }
-
+        public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<Grade> Grades { get; set; }
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<StudentDetailInfo> StudentDetailInfos { get; set; }
-        public virtual DbSet<User> Users { get; set; }
+       // public virtual DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -60,17 +60,28 @@ namespace TibFinanceDataAccess.Models
                 .Property(e => e.Std_BloodGroup)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<User>()
-                .Property(e => e.UserName)
-                .IsUnicode(false);
+            //modelBuilder.Entity<User>()
+            //    .Property(e => e.UserName)
+            //    .IsUnicode(false);
 
-            modelBuilder.Entity<User>()
-                .Property(e => e.Email)
-                .IsUnicode(false);
+            //modelBuilder.Entity<User>()
+            //    .Property(e => e.Email)
+            //    .IsUnicode(false);
 
-            modelBuilder.Entity<User>()
-                .Property(e => e.Password)
+            //modelBuilder.Entity<User>()
+            //    .Property(e => e.Password)
+            //    .IsUnicode(false);
+            modelBuilder.Entity<Customer>()
+                .Property(e => e.CustomerName)
                 .IsUnicode(false);
+            modelBuilder.Entity<Customer>()
+               .Property(e => e.Email)
+               .IsUnicode(false);
+            modelBuilder.Entity<Customer>()
+               .Property(e => e.PhoneNumber)
+               .IsUnicode(false);
+            
+
         }
     }
 }

@@ -1,6 +1,8 @@
-﻿using System.Web.Mvc;
+﻿using AutoMapper;
+using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using TibFinanceBusinessLayer.Mapper;
 
 namespace TibFinanceDummy
 {
@@ -13,7 +15,9 @@ namespace TibFinanceDummy
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             UnityConfig.RegisterComponents();
-
+           // Mapper.Initialize(c=>c.AddProfile<MappingProfile>())
+           // Mapper.(c => c.AddProfile<MappingProfile>());
+           
         }
     }
 }

@@ -1,0 +1,144 @@
+﻿﻿﻿@model TibFinanceDataAccess.Models.Module
+
+@{
+    ViewBag.Title = "Index";
+}
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+
+
+<h2>Module List</h2>
+<div class="mt-5">
+    <a href="#" class="btn btn-info" onclick="AddNewModule()">Add New Module</a>
+</div>
+
+
+
+<table id="studentTable" class="table table-striped">
+    <thead>
+        <tr>
+            <th>Module Id</th>
+            <th>Module Name</th>
+            <th>Created By</th>
+            <th>Updated by</th>
+            <th>Menu Name</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody id="SetModuleList">
+    </tbody>
+</table>
+<div class="modal fade" id="MyModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h4 id="ModalTitle"></h4>
+            </div>
+            <div class="modal-body">
+                <form id="form">
+                    <fieldset id="SubmitForm">
+                        @Html.HiddenFor(m => m.ModuleId, new { @id = "ModuleId" })
+
+                        <div class="form-group mt-2">
+                            @Html.TextBoxFor(m => m.ModuleName, new { @id = "ModuleName", @class = "form-control", @placeholder = "ModuleName" })
+                        </div>
+                        <div class="form-group mt-2">
+                            @Html.TextBoxFor(m => m.CreatedBy, new { @id = "CreatedBy", @class = "form-control", @placeholder = "CreatedBy" })
+                        </div>
+                        <div class="form-group mt-2">
+                            @Html.TextBoxFor(m => m.UpdatedBy, new { @id = "UpdatedBy", @class = "form-control", @placeholder = "Address" })
+                        </div>
+                     
+                        <div class="form-group mt-2">
+                            <a href="#" class="btn btn-block btn-danger" id="SaveModule">Create Module</a>
+                        </div>
+
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $.get("/Module/AllModules", null, GetModules);
+    function GetModules(ModuleList) {
+        var SetData = $("#SetModuleList");
+        console.log(ModuleList);
+        for (var i = 0; i < ModuleList.length; i++) {
+            var Data = "<tr class='row_" + ModuleList[i].ModuleId + "'>" +
+                "<td>" + ModuleList[i].ModuleId + "</td>" +
+                "<td>" + ModuleList[i].ModuleName + "</td>" +
+                "<td>" + ModuleList[i].CreatedBy + "</td>" +
+                "<td>" + ModuleList[i].UpdatedBy + "</td>" +
+                "<td>" + ModuleList[i].MenuName + "</td>" +
+                "<td>" + "<a href='#' class='btn btn-warning' onclick='EditModule(" + ModuleList[i].ModuleId + ")' ><span class='glyphicon glyphicon-edit'></span>Edit</a>" + "</td>" +
+                "<td>" + "<a href='#' class='btn btn-danger' onclick='ConfirmDelete(" + ModuleList[i].ModuleId + ")'><span class='glyphicon glyphicon-trash'></span>Delete</a>" + "</td>" +
+                "</tr>";
+               
+            console.log(Data);
+
+            SetData.append(Data);
+
+        }
+    }
+    function AddNewModule() {
+        $("#form")[0].reset();
+        $("#ModuleId").val(0);
+        $("#DropDwn option:selected").text("--Select Menu--");
+        $("#ModalTitle").html("Add New Module");
+        $("#MyModal").modal('show');
+    }
+    $("#SaveModule").click(function (e) {
+        e.preventDefault();
+        var form = document.getElementById("form");
+        var formData = new FormData(form);
+
+        console.log(formData);
+        $.ajax({
+
+            url: "/Module/AddOrEditModule",
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                console.log(response);
+            }
+
+        })
+    })
+    function EditModule(ModuleId) {
+        var url = "/Module/GetModuleId?ModuleId=" + ModuleId;
+        $("#ModalTitle").html("Update Module Record");
+        $("#MyModal").modal('show');
+        $.ajax({
+            type: "GET",
+            url: url,
+            success: function (data) {
+                var obj = JSON.parse(data);
+                $("#ModuleId").val(obj.ModuleId);
+                $("#MenuId").val(obj.MenuId);
+
+                $("#ModuleName").val(obj.ModuleName);
+                $("#CreatedBy").val(obj.CreatedBy);
+                $("#UpdatedBy").val(obj.UpdatedBy);
+                $("#DropDwn option:selected").text(obj.MenuName);
+                $("#DropDwn option:selected").val(obj.MenuId);
+            }
+        })
+    }
+    var ConfirmDelete = function (ModuleId) {
+        var moduleId = $("#ModuleId").val();
+        $.ajax({
+            type: "POST",
+            url: "/Module/DeleteModule?ModuleId=" + ModuleId,
+            success: function (result) {
+                $(".row_" + ModuleId).remove();
+            }
+        })
+    }
+
+</script>
