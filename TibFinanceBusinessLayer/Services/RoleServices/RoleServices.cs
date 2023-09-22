@@ -26,5 +26,54 @@ namespace TibFinanceBusinessLayer.Services.RoleServices
         {
             return roleRepository.Create(role);
         }
+        public bool DeleteModule(int id)
+        {
+            try
+            {
+                var module = roleRepository.GetById(id);
+                roleRepository.Delete(module);
+                return true;
+            }
+
+            catch (Exception)
+            {
+                return false;
+                throw;
+
+            }
+            //throw new NotImplementedException();
+        }
+        public  IEnumerable<Role> GetAllRoles()
+        {
+            try
+            {
+                return roleRepository.GetAll().ToList();
+            }catch(Exception e) 
+            {
+                throw e;
+            }
+        }
+        public Role GetRoleById(int? moduleId)
+        {
+            return roleRepository.GetById(moduleId);
+            // var menu = _menuRepository.GetById(menuId);
+
+            //  throw new NotImplementedException();
+        }
+        public void UpdateModule(Role role)
+        {
+            try
+            {
+               
+
+                roleRepository.Update(role);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            // throw new NotImplementedException();
+        }
+
     }
 }
