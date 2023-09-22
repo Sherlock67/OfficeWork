@@ -21,3 +21,4 @@ C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceDataAccess\obj\Deb
 C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceDataAccess\obj\Debug\TibFinanceDataAccess.csproj.CopyComplete
 C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceDataAccess\obj\Debug\TibFinanceDataAccess.dll
 C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceDataAccess\obj\Debug\TibFinanceDataAccess.pdb
+C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceDataAccess\obj\Debug\TibFinanceDataAccess.Migrations.Roletablemigrations.resources

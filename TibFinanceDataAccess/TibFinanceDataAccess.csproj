@@ -84,6 +84,10 @@
     <Compile Include="Migrations\202309211306324_module and menu datatable schema update.designer.cs">
       <DependentUpon>202309211306324_module and menu datatable schema update.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202309220600255_Role table migrations.cs" />
+    <Compile Include="Migrations\202309220600255_Role table migrations.designer.cs">
+      <DependentUpon>202309220600255_Role table migrations.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -92,6 +96,7 @@
     <Compile Include="Models\Menu.cs" />
     <Compile Include="Models\Model1.cs" />
     <Compile Include="Models\Module.cs" />
+    <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\StudentDetailInfo.cs" />
     <Compile Include="Models\UserLogin.cs" />
@@ -129,6 +134,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202309211306324_module and menu datatable schema update.resx">
       <DependentUpon>202309211306324_module and menu datatable schema update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202309220600255_Role table migrations.resx">
+      <DependentUpon>202309220600255_Role table migrations.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
