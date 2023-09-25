@@ -94,6 +94,10 @@
     <Compile Include="Migrations\202309221057357_User and Role relationship.designer.cs">
       <DependentUpon>202309221057357_User and Role relationship.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202309250808454_user permission table integrated.cs" />
+    <Compile Include="Migrations\202309250808454_user permission table integrated.designer.cs">
+      <DependentUpon>202309250808454_user permission table integrated.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -107,6 +111,7 @@
     <Compile Include="Models\StudentDetailInfo.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserLogin.cs" />
+    <Compile Include="Models\UserPermissions.cs" />
     <Compile Include="Models\ViewModel\GradeViewModel.cs" />
     <Compile Include="Models\ViewModel\StudentViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -149,6 +154,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202309221057357_User and Role relationship.resx">
       <DependentUpon>202309221057357_User and Role relationship.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202309250808454_user permission table integrated.resx">
+      <DependentUpon>202309250808454_user permission table integrated.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
