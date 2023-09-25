@@ -1,0 +1,149 @@
+﻿@model TibFinanceDataAccess.Models.User
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>User List</h2>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+<div class="mt-5">
+    <a href="#" class="btn btn-info" onclick="AddNewUser()">Add New User</a>
+</div>
+<table id="userTable" class="table table-striped">
+    <thead>
+        <tr>
+            <th>User Id</th>
+            <th>User Name</th>
+            <th>Full Name </th>
+            <th class="text-center m-5">Action</th>
+        </tr>
+    </thead>
+    <tbody id="SetUserList">
+    </tbody>
+</table>
+<div class="modal fade" id="MyModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="d-flex justify-content-start">
+                    <h4 id="ModalTitle">Add New User</h4>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <a href="#" class="close float-end" data-dismiss="modal">&times;</a>
+                </div>
+            </div>
+            <div class="modal-body">
+                <form id="form">
+                    <fieldset id="SubmitForm">
+                        @Html.HiddenFor(m => m.UserId, new { @id = "UserId" })
+
+                        <div class="form-group mt-2">
+                            @Html.TextBoxFor(m => m.UserName, new { @id = "UserName", @class = "form-control", @placeholder = "UserName" })
+                        </div>
+                        <div class="form-group mt-2">
+                            @Html.TextBoxFor(m => m.Password, new { @id = "Password", @class = "form-control", @placeholder = "Password" })
+                        </div>
+                        <div class="form-group mt-2">
+                            @Html.TextBoxFor(m => m.FullName, new { @id = "FullName", @class = "form-control", @placeholder = "FullName" })
+                        </div>
+                        @*<div class="form-group mt-2">
+                            @Html.TextBoxFor(m => m.RoleId, new { @id = "RoleId", @class = "form-control", @placeholder = "RoleId" })
+                        </div>*@
+                        <div class="form-group mt-2">
+                            @Html.DropDownListFor(m => m.RoleId, ViewBag.ListOfRole as SelectList, "--Select Role--", new { @id = "DropDwn", @class = "form-control" })
+                        </div>
+                        <div class="form-group mt-2">
+                            <a href="#" class="btn btn-block btn-danger" id="SaveUser">Create User</a>
+                        </div>
+
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $.get("/User/GetAllUser", null, GetUsers);
+    function GetUsers(UserList) {
+        var SetData = $("#SetUserList");
+        console.log(UserList);
+        for (var i = 0; i < UserList.length; i++) {
+            var Data = "<tr class='row_" + UserList[i].UserId + "'>" +
+                "<td>" + UserList[i].UserId + "</td>" +
+                "<td>" + UserList[i].UserName + "</td>" +
+                "<td>" + UserList[i].FullName + "</td>" +
+                "<td>" + "<a href='#' class=' btn-sm btn-warning' onclick='EditUser(" + UserList[i].UserId + ")' ><span class='glyphicon glyphicon-edit'></span>Edit</a>" +
+                "<a href='#' class='mx-2 btn-sm btn-danger' onclick='ConfirmDelete(" + UserList[i].UserId + ")'><span class='glyphicon glyphicon-trash'></span>Delete</a>"
+
+            "</td>"
+            "</tr>";
+
+
+            console.log(Data);
+
+            SetData.append(Data);
+
+        }
+
+    }
+    function AddNewUser()
+    {
+        $("#form")[0].reset();
+        $("#UserId").val(0);
+       // $("#DropDwn option:selected").text("--Select Module--");
+        $("#ModalTitle").html("Add New User");
+        $("#MyModal").modal('show');
+    }
+    $("#SaveUser").click(function (e) {
+        e.preventDefault();
+        var form = document.getElementById("form");
+        var formData = new FormData(form);
+
+        console.log(formData);
+        $.ajax({
+
+            url: "/User/AddOrEditUser",
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                console.log(response);
+            }
+
+        })
+    })
+    function EditMenu(UserId) {
+        var url = "/User/GetUserId?UserId=" + UserId;
+        $("#ModalTitle").html("Update User Record");
+        $("#MyModal").modal('show');
+        $.ajax({
+            type: "GET",
+            url: url,
+            success: function (data) {
+                var obj = JSON.parse(data);
+                $("#UserId").val(obj.UserId);
+                $("#UserName").val(obj.UserName);
+                $("#FullName").val(obj.FullName);
+                $("#Password").val(obj.Password);
+                $("#DropDwn option:selected").text(obj.RoleId);
+                $("#DropDwn option:selected").val(obj.RoleName);
+
+            }
+        })
+    }
+    var ConfirmDelete = function (UserId) {
+        var userId = $("#UserId").val();
+        $.ajax({
+            type: "POST",
+            url: "/User/DeleteUser?UserId=" + UserId,
+            success: function (result) {
+                $(".row_" + UserId).remove();
+            }
+        })
+    }
+    </script>

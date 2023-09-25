@@ -1,0 +1,6 @@
+C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinance.Shared\bin\Debug\TibFinance.Shared.dll
+C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinance.Shared\bin\Debug\TibFinance.Shared.pdb
+C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinance.Shared\obj\Debug\TibFinanceShared.csproj.AssemblyReference.cache
+C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinance.Shared\obj\Debug\TibFinanceShared.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinance.Shared\obj\Debug\TibFinance.Shared.dll
+C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinance.Shared\obj\Debug\TibFinance.Shared.pdb

@@ -61,6 +61,7 @@
     <Compile Include="Interface\Menus\IMenu.cs" />
     <Compile Include="Interface\Modules\IModule.cs" />
     <Compile Include="Interface\Roles\IRole.cs" />
+    <Compile Include="Interface\Users\IUser.cs" />
     <Compile Include="Migrations\202309180704301_ApplyPrevious migration into dataaccess project.cs" />
     <Compile Include="Migrations\202309180704301_ApplyPrevious migration into dataaccess project.designer.cs">
       <DependentUpon>202309180704301_ApplyPrevious migration into dataaccess project.cs</DependentUpon>
@@ -114,6 +115,7 @@
     <Compile Include="Repository\MenusRepository\MenuRepository.cs" />
     <Compile Include="Repository\ModuleRepository\ModuleRepository.cs" />
     <Compile Include="Repository\RolesRepository\RoleRepository.cs" />
+    <Compile Include="Repository\UserRepository\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

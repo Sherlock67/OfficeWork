@@ -14,7 +14,7 @@ namespace TibFinanceBusinessLayer.Services.UserServices
         private readonly UserRepository userRepository;
         public UserService(UserRepository userRepository)
         {
-            userRepository = userRepository;
+            this.userRepository = userRepository;
         }
         public User CreateUser(User user)
         {
@@ -48,14 +48,14 @@ namespace TibFinanceBusinessLayer.Services.UserServices
                 throw e;
             }
         }
-        public User GetRoleById(int? userId)
+        public User GetUserById(int? userId)
         {
             return userRepository.GetById(userId);
             // var menu = _menuRepository.GetById(menuId);
 
             //  throw new NotImplementedException();
         }
-        public void UpdateRole(User user)
+        public void UpdateUser(User user)
         {
             try
             {
