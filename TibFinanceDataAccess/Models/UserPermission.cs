@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TibFinanceDataAccess.Models
 {
-    public class UserPermissions
+    public class UserPermission
     {
         [Key]
         public int PermissionId { get; set; }

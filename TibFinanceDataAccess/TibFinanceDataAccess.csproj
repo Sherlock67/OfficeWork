@@ -61,6 +61,7 @@
     <Compile Include="Interface\Menus\IMenu.cs" />
     <Compile Include="Interface\Modules\IModule.cs" />
     <Compile Include="Interface\Roles\IRole.cs" />
+    <Compile Include="Interface\UserPermissions\IUserPermission.cs" />
     <Compile Include="Interface\Users\IUser.cs" />
     <Compile Include="Migrations\202309180704301_ApplyPrevious migration into dataaccess project.cs" />
     <Compile Include="Migrations\202309180704301_ApplyPrevious migration into dataaccess project.designer.cs">
@@ -111,7 +112,7 @@
     <Compile Include="Models\StudentDetailInfo.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserLogin.cs" />
-    <Compile Include="Models\UserPermissions.cs" />
+    <Compile Include="Models\UserPermission.cs" />
     <Compile Include="Models\ViewModel\GradeViewModel.cs" />
     <Compile Include="Models\ViewModel\StudentViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -120,6 +121,7 @@
     <Compile Include="Repository\MenusRepository\MenuRepository.cs" />
     <Compile Include="Repository\ModuleRepository\ModuleRepository.cs" />
     <Compile Include="Repository\RolesRepository\RoleRepository.cs" />
+    <Compile Include="Repository\UserPermissionRepository\PermissionRepository.cs" />
     <Compile Include="Repository\UserRepository\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>

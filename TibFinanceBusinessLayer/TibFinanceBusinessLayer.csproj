@@ -48,6 +48,7 @@
     <Compile Include="IService\IMenusService\IMenuService.cs" />
     <Compile Include="IService\IModuleService\IModuleService.cs" />
     <Compile Include="IService\IRoleServices\IRoleService.cs" />
+    <Compile Include="IService\IUserPermissions\IUserPermissions.cs" />
     <Compile Include="IService\IUserServices\IUserService.cs" />
     <Compile Include="Mapper\MappingProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

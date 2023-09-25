@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TibFinanceDataAccess.Interface.Roles;
 using TibFinanceDataAccess.Models;
 
