@@ -55,6 +55,7 @@
     <Compile Include="Services\LoginService\LoginServices.cs" />
     <Compile Include="Services\MenuServices\MenuService.cs" />
     <Compile Include="Services\ModuleServices\ModuleService.cs" />
+    <Compile Include="Services\Permissions\PermissionsServices.cs" />
     <Compile Include="Services\RoleServices\RoleServices.cs" />
     <Compile Include="Services\UserServices\UserService.cs" />
   </ItemGroup>

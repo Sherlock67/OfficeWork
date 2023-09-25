@@ -34,7 +34,7 @@ namespace TibFinanceBusinessLayer.Services.Permissions
                 throw;
             }
         }
-        public IEnumerable<UserPermission> GetUserPermission()
+        public IEnumerable<UserPermission> GetAllUserPermission()
         {
             try
             {

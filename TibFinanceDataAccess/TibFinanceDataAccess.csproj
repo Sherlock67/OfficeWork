@@ -99,6 +99,10 @@
     <Compile Include="Migrations\202309250808454_user permission table integrated.designer.cs">
       <DependentUpon>202309250808454_user permission table integrated.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202309251249146_user permission table changed a variable.cs" />
+    <Compile Include="Migrations\202309251249146_user permission table changed a variable.designer.cs">
+      <DependentUpon>202309251249146_user permission table changed a variable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -159,6 +163,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202309250808454_user permission table integrated.resx">
       <DependentUpon>202309250808454_user permission table integrated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202309251249146_user permission table changed a variable.resx">
+      <DependentUpon>202309251249146_user permission table changed a variable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

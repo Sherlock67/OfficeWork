@@ -19,7 +19,8 @@ namespace TibFinanceDataAccess.Models
         public int UserId { get; set; }
         public string UserName { get; set; }
         public bool IsEdit { get; set; }    
-        public bool IsAdd { get; set; }
+       // public bool IsAdd { get; set; }
+        public bool isGetAll { get; set; }
         public bool IsDelete { get; set; }
         public bool IsCreate { get; set; }
     }

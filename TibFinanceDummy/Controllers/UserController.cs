@@ -1,12 +1,6 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.ApplicationServices;
 using System.Web.Mvc;
-using TibFinanceBusinessLayer.IService.IModuleService;
-using TibFinanceBusinessLayer.Services.ModuleServices;
 using TibFinanceBusinessLayer.Services.RoleServices;
 using TibFinanceBusinessLayer.Services.UserServices;
 using TibFinanceDataAccess;

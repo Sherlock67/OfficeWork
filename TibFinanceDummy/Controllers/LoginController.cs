@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using TibFinance.Shared.ViewModels;
-using TibFinanceBusinessLayer.IService.ILoginService;
+﻿using System.Web.Mvc;
 using TibFinanceBusinessLayer.Services.LoginService;
 
 namespace TibFinanceDummy.Controllers
