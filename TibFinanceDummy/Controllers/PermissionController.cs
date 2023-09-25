@@ -36,11 +36,12 @@ namespace TibFinanceDummy.Controllers
             UserPermission userpermission = db.UserPermissions.Where(x => x.PermissionId == permission.PermissionId).FirstOrDefault();
             if (userpermission != null)
             {
-                userpermission.IsDelete = true;
+                //userpermission.IsDelete = true;
 
                 userpermission.IsDelete = permission.IsDelete;
                 userpermission.IsCreate = permission.IsCreate;
-                userpermission.
+                userpermission.IsEdit = permission.IsEdit;
+                userpermission.isGetAll = permission.isGetAll;
                 permissionsServices.UpdateUserPermission(permission);
             }
             else
