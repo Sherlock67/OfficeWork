@@ -14,11 +14,11 @@ namespace TibFinanceDataAccess.Models
         public int ModuleId { get; set; }
         public string RoutingPath { get; set; }
         public string ModuleName { get; set; }
-        public int MenuId { get; set; }
+        public int? MenuId { get; set; }
         public string MenuName { get; set; } 
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
         public string UserName { get; set; }
-        public int RoleId { get; set; }
+        public int? RoleId { get; set; }
         public string RoleName { get; set; }
         public bool IsEdit { get; set; }    
        // public bool IsAdd { get; set; }

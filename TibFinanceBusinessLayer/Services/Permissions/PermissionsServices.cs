@@ -55,13 +55,13 @@ namespace TibFinanceBusinessLayer.Services.Permissions
             {   var modules = moduleRepository.GetAll();
                 var roles = roleRepository.GetAll();
                 var menus = menuRepository.GetAll();
-                var permissions = permissionRepository.GetAll();
+                var permissions = permissionRepository.GetAll().ToList();
                 var allPermission = (from module in modules
                                      join menu in menus on module.ModuleId equals menu.ModuleId into modulemenus
                                      from modulemenu in modulemenus.DefaultIfEmpty()
                                      join permission in permissions on
                                      new { moduleId = Convert.ToInt32(module.ModuleId), menuId = Convert.ToInt32(modulemenu.MenuId) } equals
-                                     new { moduleId = Convert.ToInt32(permission.ModuleId), menuId = Convert.ToInt32(permission.MenuId) }
+                                     new { moduleId = Convert.ToInt32(permission==null?0:permission.ModuleId), menuId = Convert.ToInt32(permission==null?0:permission.MenuId) }
                                      into permList from p in permList.DefaultIfEmpty()
                                      select new vmModuleMenu
                                      {
@@ -71,7 +71,8 @@ namespace TibFinanceBusinessLayer.Services.Permissions
                                          MenuDescription = modulemenu.MenuDescription,
                                          MenuName = modulemenu.MenuName,
                                          MenuId = modulemenu.MenuId,
-                                         RoleId = p.RoleId,
+                                         RoleId = Convert.ToInt32(p==null?0:p.RoleId),
+                                         
                                          Roles = roles.Select(x => new vmRole { RoleId = x.RoleId, RoleName = x.RoleName }).ToList(),
                                          Modules = modules.Select(x => new vmModule { ModuleId = x.ModuleId, ModuleName = x.ModuleName }).ToList(),
                                          Menus = menus.Select(x => new vmMenu { MenuId = x.MenuId, MenuName = x.MenuName }).ToList()

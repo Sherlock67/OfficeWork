@@ -107,6 +107,10 @@
     <Compile Include="Migrations\202309251338133_user permission table changed again with roleid and role name.designer.cs">
       <DependentUpon>202309251338133_user permission table changed again with roleid and role name.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202309260600040_permission class nullable chnaged on ids.cs" />
+    <Compile Include="Migrations\202309260600040_permission class nullable chnaged on ids.designer.cs">
+      <DependentUpon>202309260600040_permission class nullable chnaged on ids.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -173,6 +177,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202309251338133_user permission table changed again with roleid and role name.resx">
       <DependentUpon>202309251338133_user permission table changed again with roleid and role name.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202309260600040_permission class nullable chnaged on ids.resx">
+      <DependentUpon>202309260600040_permission class nullable chnaged on ids.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

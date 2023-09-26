@@ -29,10 +29,8 @@ namespace TibFinanceDummy.Controllers
         // GET: Permission
         public ActionResult Index()
         {
-            var userList = userService.GetAllUsers();
-            var roleList = roleServices.GetAllRoles();
-            ViewBag.ListOfUsers = new SelectList(userList, "UserId", "UserName");
-            ViewBag.ListOfRole = new SelectList(roleList, "RoleId", "RoleName");
+           // var userList = userService.GetAllUsers();
+           // ViewBag.ListOfUsers = new SelectList(userList, "UserId", "UserName");
             return View();
         }
         public JsonResult GetAllPermissions()

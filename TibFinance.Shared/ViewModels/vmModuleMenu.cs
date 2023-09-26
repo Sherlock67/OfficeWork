@@ -18,6 +18,7 @@ namespace TibFinanceShared.ViewModels
         public int ModuleId { get; set; }
         public string ModuleName { get; set; }
         public int RoleId { get; set; }
+        public int UserId { get; set; }
         public List<vmModule> Modules { get; set; }
         public List<vmRole> Roles { get; set; }
         public List<vmMenu> Menus { get; set; }
