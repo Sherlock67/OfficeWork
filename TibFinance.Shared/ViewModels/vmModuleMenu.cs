@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using TibFinance.Shared.ViewModels;
@@ -16,8 +17,10 @@ namespace TibFinanceShared.ViewModels
         public string UpdatedBy { get; set; }
         public int ModuleId { get; set; }
         public string ModuleName { get; set; }
+        public int RoleId { get; set; }
         public List<vmModule> Modules { get; set; }
         public List<vmRole> Roles { get; set; }
+        public List<vmMenu> Menus { get; set; }
 
     }
   

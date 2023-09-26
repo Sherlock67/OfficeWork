@@ -25,3 +25,4 @@ C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceDataAccess\obj\Deb
 C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceDataAccess\obj\Debug\TibFinanceDataAccess.pdb
 C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceDataAccess\obj\Debug\TibFinanceDataAccess.Migrations.userpermissiontableintegrated.resources
 C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceDataAccess\obj\Debug\TibFinanceDataAccess.Migrations.userpermissiontablechangedavariable.resources
+C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceDataAccess\obj\Debug\TibFinanceDataAccess.Migrations.userpermissiontablechangedagainwithroleidandrolename.resources

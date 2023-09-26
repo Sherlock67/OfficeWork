@@ -44,7 +44,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\CustomerViewModel.cs" />
     <Compile Include="ViewModels\UserLoginVM.cs" />
+    <Compile Include="ViewModels\vmModule.cs" />
     <Compile Include="ViewModels\vmModuleMenu.cs" />
+    <Compile Include="ViewModels\vmRole.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

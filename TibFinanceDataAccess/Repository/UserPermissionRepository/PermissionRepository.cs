@@ -17,7 +17,7 @@ namespace TibFinanceDataAccess.Repository.UserPermissionRepository
         public UserPermission Create(UserPermission entity)
         {
             db = new ApplicationDbContext();
-            var obj = db.UserPermissions.Add(entity);
+            var obj = db.MenuPermissions.Add(entity);
             db.SaveChanges();
             return obj;
            
@@ -26,7 +26,7 @@ namespace TibFinanceDataAccess.Repository.UserPermissionRepository
         public void Delete(UserPermission entity)
         {
             db = new ApplicationDbContext();
-            db.UserPermissions.Remove(entity);
+            db.MenuPermissions.Remove(entity);
             db.SaveChanges();
            
         }
@@ -37,7 +37,7 @@ namespace TibFinanceDataAccess.Repository.UserPermissionRepository
             try
             {
                 this.db = new ApplicationDbContext();
-                return db.UserPermissions.ToList();
+                return db.MenuPermissions.ToList();
 
             }
             catch (Exception ex)
@@ -50,14 +50,14 @@ namespace TibFinanceDataAccess.Repository.UserPermissionRepository
         public UserPermission GetById(int? Id)
         {
             db = new ApplicationDbContext();
-            return db.UserPermissions.Where(x => x.PermissionId == Id).SingleOrDefault();
+            return db.MenuPermissions.Where(x => x.PermissionId == Id).SingleOrDefault();
             
         }
 
         public void Update(UserPermission entity)
         {
             db = new ApplicationDbContext();
-            db.UserPermissions.AddOrUpdate(entity);
+            db.MenuPermissions.AddOrUpdate(entity);
             db.SaveChanges();
            
         }

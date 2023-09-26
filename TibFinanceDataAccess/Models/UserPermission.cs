@@ -18,6 +18,8 @@ namespace TibFinanceDataAccess.Models
         public string MenuName { get; set; } 
         public int UserId { get; set; }
         public string UserName { get; set; }
+        public int RoleId { get; set; }
+        public string RoleName { get; set; }
         public bool IsEdit { get; set; }    
        // public bool IsAdd { get; set; }
         public bool isGetAll { get; set; }

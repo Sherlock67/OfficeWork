@@ -1,17 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TibFinance.Shared.ViewModels;
+using TibFinanceDataAccess.Interface.Menus;
+using TibFinanceDataAccess.Interface.Modules;
+using TibFinanceDataAccess.Interface.Roles;
 using TibFinanceDataAccess.Interface.UserPermissions;
 using TibFinanceDataAccess.Models;
+using TibFinanceDataAccess.Repository.MenusRepository;
+using TibFinanceDataAccess.Repository.ModuleRepository;
+using TibFinanceDataAccess.Repository.RolesRepository;
 using TibFinanceDataAccess.Repository.UserPermissionRepository;
+using TibFinanceShared.ViewModels;
 
 namespace TibFinanceBusinessLayer.Services.Permissions
 {
     public class PermissionsServices
     {
         private IUserPermission permissionRepository;
+        private IModule moduleRepository;
+        private IMenu menuRepository;
+        private IRole roleRepository;
+        //private IUserPermission permissionRepository;
         public PermissionsServices()
         {
+            this.menuRepository = new MenuRepository();
+            this.moduleRepository = new ModuleRepository();
+            this.roleRepository = new RoleRepository();
             this.permissionRepository = new PermissionRepository();
 
         }
@@ -34,11 +49,38 @@ namespace TibFinanceBusinessLayer.Services.Permissions
                 throw;
             }
         }
-        public IEnumerable<UserPermission> GetAllUserPermission()
+        public IEnumerable<vmModuleMenu> GetAllUserPermission()
         {
             try
-            {
-                return permissionRepository.GetAll().ToList();
+            {   var modules = moduleRepository.GetAll();
+                var roles = roleRepository.GetAll();
+                var menus = menuRepository.GetAll();
+                var permissions = permissionRepository.GetAll();
+                var allPermission = (from module in modules
+                                     join menu in menus on module.ModuleId equals menu.ModuleId into modulemenus
+                                     from modulemenu in modulemenus.DefaultIfEmpty()
+                                     join permission in permissions on
+                                     new { moduleId = Convert.ToInt32(module.ModuleId), menuId = Convert.ToInt32(modulemenu.MenuId) } equals
+                                     new { moduleId = Convert.ToInt32(permission.ModuleId), menuId = Convert.ToInt32(permission.MenuId) }
+                                     into permList from p in permList.DefaultIfEmpty()
+                                     select new vmModuleMenu
+                                     {
+
+                                         ModuleId = module.ModuleId,
+                                         ModuleName = module.ModuleName,
+                                         MenuDescription = modulemenu.MenuDescription,
+                                         MenuName = modulemenu.MenuName,
+                                         MenuId = modulemenu.MenuId,
+                                         RoleId = p.RoleId,
+                                         Roles = roles.Select(x => new vmRole { RoleId = x.RoleId, RoleName = x.RoleName }).ToList(),
+                                         Modules = modules.Select(x => new vmModule { ModuleId = x.ModuleId, ModuleName = x.ModuleName }).ToList(),
+                                         Menus = menus.Select(x => new vmMenu { MenuId = x.MenuId, MenuName = x.MenuName }).ToList()
+
+
+                                     }).ToList();
+                return allPermission;
+
+
             }
             catch (Exception ex)
             {
