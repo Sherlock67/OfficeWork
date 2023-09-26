@@ -111,6 +111,10 @@
     <Compile Include="Migrations\202309260600040_permission class nullable chnaged on ids.designer.cs">
       <DependentUpon>202309260600040_permission class nullable chnaged on ids.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202309260814011_moduleid null.cs" />
+    <Compile Include="Migrations\202309260814011_moduleid null.designer.cs">
+      <DependentUpon>202309260814011_moduleid null.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -180,6 +184,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202309260600040_permission class nullable chnaged on ids.resx">
       <DependentUpon>202309260600040_permission class nullable chnaged on ids.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202309260814011_moduleid null.resx">
+      <DependentUpon>202309260814011_moduleid null.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

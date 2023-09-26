@@ -27,3 +27,4 @@ C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceDataAccess\obj\Deb
 C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceDataAccess\obj\Debug\TibFinanceDataAccess.Migrations.userpermissiontablechangedavariable.resources
 C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceDataAccess\obj\Debug\TibFinanceDataAccess.Migrations.userpermissiontablechangedagainwithroleidandrolename.resources
 C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceDataAccess\obj\Debug\TibFinanceDataAccess.Migrations.permissionclassnullablechnagedonids.resources
+C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceDataAccess\obj\Debug\TibFinanceDataAccess.Migrations.moduleidnull.resources

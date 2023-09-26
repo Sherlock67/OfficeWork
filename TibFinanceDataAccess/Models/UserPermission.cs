@@ -11,7 +11,7 @@ namespace TibFinanceDataAccess.Models
     {
         [Key]
         public int PermissionId { get; set; }
-        public int ModuleId { get; set; }
+        public int? ModuleId { get; set; }
         public string RoutingPath { get; set; }
         public string ModuleName { get; set; }
         public int? MenuId { get; set; }
