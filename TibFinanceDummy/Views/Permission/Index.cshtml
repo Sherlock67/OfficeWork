@@ -4,102 +4,133 @@
 }
 
 <h2>All Permission</h2>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 
-<div class="mt-5">
-    <a href="#" class="btn btn-info" onclick="AddNewPermission()">Add New Permission</a>
-</div>
 <table id="permissionTable" class="table table-striped">
     <thead>
         <tr>
             <th>Menu Name</th>
             <th>Module Name </th>
             <th>RoleName</th>
-            
+
         </tr>
     </thead>
     <tbody id="SetPermissionList">
-       
     </tbody>
+    <div class="mt-5">
+        <a href="#" class="btn btn-info" id="add" onclick="getsome()">Add New Permission</a>
+    </div>
 </table>
 <script>
+    let pList = [];
     $.get("/Permission/GetAllPermissions", null, GetPermissions);
-    function GetPermissions(pList) {
-        var SetData = $("#SetPermissionList");
+    function GetPermissions(response) {
+        var SetData = $("#SetPermissionList"); pList = response;
         console.log(pList);
         for (var i = 0; i < pList.length; i++) {
-            var Data = "<tr class='row_" + pList[i].PermissionId + "'>" +                
-                "<td> <select id='menuList_"+i+"' name='customer'>" + LoadMenu(pList[i],i) + " </select></td>" +
-                "<td> <select id=moduleList_" + i + "' name='customer1'>" + LoadModule(pList[i],i) + "</td>" +
+            let menu = pList[i];
+            var Data = "<tr class='row_" + pList[i].PermissionId + "'>" +
+                "<td> <select onchange='onManuChange(event," + menu.MenuId + ","+i+")' id='menuList_" + i + "' name='customer'>" + LoadMenu(pList[i], i) + " </select></td>" +
+                "<td> <select id=moduleList_" + i + "' name='customer1'>" + LoadModule(pList[i], i) + "</td>" +
                 "<td> <select id=roleList_" + i + "' name='customer2'>" + LoadRole(pList[i], i) + "</td>" +
-                
-
-                //"<td>" + "<a href='#' class=' btn-sm btn-warning' onclick='EditModule(" + pList[i].PermissionId + ")' ><span class='glyphicon glyphicon-edit'></span>Edit</a>" +
-                //"<a href='#' class='mx-2 btn-sm btn-danger' onclick='ConfirmDelete(" + pList[i].PermissionId + ")'><span class='glyphicon glyphicon-trash'></span>Delete</a>"
-
-            "</td>"
-            "</tr>";            
+                "</td>"
+            "</tr>";
             SetData.append(Data);
         }
 
     }
-    
-    function LoadMenu(permmission,index) {
-        var options1 = '';
+    function onManuChange(event, menuId, index) {
+        var menuId=event.target.value;
+        console.log(menuId);
+        console.log(pList[index]);
+        pList[index].MenuId = menuId;
+        console.log(pList[index]);
+    }
+    function LoadMenu(permmission, index) {
+        var options = '';
         var menuId = permmission.MenuId;
         if (menuId == 0) {
-            options1 = '<option value="" selected>Select</option>';
+            options = '<option value="" selected>Select</option>';
         } else {
-            options1 = '<option value="">Select</option>';
+            options = '<option value="">Select</option>';
         }
         var menus = permmission.Menus;
-        debugger;
         for (var i = 0; i < menus.length; i++) {
-            options1 += '<option value="' + menus[i].MenuId + '"';
-            options1 += ' ' + menuId == menus[i].MenuId?' selected':'' + ' '
-            options1 += '>'+menus[i].MenuName + '</option>';
-            }        
-        return options1;
+            options += '<option class=" drpdwnlist"  value="' + menus[i].MenuId + '"';
+            options += ' ' + menuId == menus[i].MenuId ? ' selected' : '' + ' '
+            options += '>' + menus[i].MenuName + '</option>';
+        }
+        return options;
     }
     function LoadModule(permmission, index) {
-        var options2 = '';
+        var options = '';
         var moduleId = permmission.ModuleId;
         if (moduleId == 0) {
-            options2 = '<option value="" selected>Select</option>';
+            options = '<option   value="" selected>Select</option>';
         }
         else {
-            options2 = '<option value="">Select</option>';
+            options = '<option  value="">Select</option>';
         }
         var modules = permmission.Modules;
         for (var i = 0; i < modules.length; i++) {
-            options2 += '<option value="' + modules[i].ModuleId + '"';
-            options2 += ' ' + moduleId == modules[i].ModuleId ? ' selected' : '' + ' '
-            options2 += '>' + modules[i].ModuleName + '</option>';
-           // options2 += '<option value="' + modules[i].ModuleId + '" ' + moduleId == modules[i].ModuleId?'selected':''  +' > ' + modules[i].ModuleName + '</option > ';
+            options += '<option class=" drpdwnlist"  value="' + modules[i].ModuleId + '"';
+            options += ' ' + moduleId == modules[i].ModuleId ? ' selected' : '' + ' '
+            options += '>' + modules[i].ModuleName + '</option>';
+
         }
-        return options2;
+        return options;
     }
     function LoadRole(permmission, index) {
-        var options3 = '';
+        var options = '';
         var roleId = permmission.RoleId;
         if (roleId == 0) {
-            options3 = '<option value="" selected>Select</option>';
+            options = '<option  value="" selected>Select</option>';
         }
         else {
-            options3 = '<option value="">Select</option>';
+            options = '<option  value="" >Select</option>';
         }
         var roles = permmission.Roles;
-        
+
         for (var i = 0; i < roles.length; i++) {
-            options3 += '<option value="' + roles[i].RoleId + '"';
-            options3 += ' ' + roleId == roles[i].RoleId ? ' selected' : '' + ' '
-            options3 += '>' + roles[i].RoleName + '</option>';
+            options += '<option class=" drpdwnlist"  value="' + roles[i].RoleId + '"';
+            options += ' ' + roleId == roles[i].RoleId ? ' selected' : '' + ' '
+            options += '>' + roles[i].RoleName + '</option>';
 
-            //options3 += '<option value="' + roles[i].RoleId + '" ' + roleId == roles[i].RoleId ? 'selected':''  +'> ' + roles[i].RoleName + '</option > ';
+
         }
-        return options3;
+        return options;
     }
-    
+    function getsome() {
+        $('#add').change(function () {
+            //debugger
+            var selectedItem = $('.drpdwnlist').val();
+            debugger
+            $.ajax({
+                type: 'POST',
+                url: "/Permission/PermissionEdit",
+                data: {
+                   id: selectedItem 
+                    
+                },
+                success: function (data) {
+                    if (data.success) {
+                        alert('Item saved to the database.');
+                    } else {
+                        alert('Failed to save item.');
+                    }
+                },
 
-    
+            });
+        });
+    }
+    function PostData() {
+
+    }
+
+
+
+
 </script>
 

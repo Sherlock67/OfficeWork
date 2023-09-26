@@ -22,8 +22,6 @@ namespace TibFinanceDummy.Controllers
         // GET: Module
         public ActionResult Index()
         {
-            //var menuList = menuService.GetAllMenus();
-            //ViewBag.ListOfMenu = new SelectList(menuList, "MenuId", "MenuName");
             return View();
         }
         public JsonResult AllModules()

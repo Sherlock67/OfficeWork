@@ -115,6 +115,10 @@
     <Compile Include="Migrations\202309260814011_moduleid null.designer.cs">
       <DependentUpon>202309260814011_moduleid null.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202309261018424_permission table updated and all corresponding name removed.cs" />
+    <Compile Include="Migrations\202309261018424_permission table updated and all corresponding name removed.designer.cs">
+      <DependentUpon>202309261018424_permission table updated and all corresponding name removed.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -187,6 +191,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202309260814011_moduleid null.resx">
       <DependentUpon>202309260814011_moduleid null.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202309261018424_permission table updated and all corresponding name removed.resx">
+      <DependentUpon>202309261018424_permission table updated and all corresponding name removed.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
