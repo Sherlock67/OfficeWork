@@ -14,11 +14,72 @@
             <th>Permission Id</th>
             <th>Menu Name</th>
             <th>Module Name </th>
-            <th></th>
+            <th>Routing Path</th>
+            <th>RoleName</th>
             <th class="text-center m-5">Action</th>
         </tr>
     </thead>
-    <tbody id="SetMenuList">
+    <tbody id="SetPermissionList">
+       
     </tbody>
 </table>
+<script>
+    $.get("/Permission/GetAllPermissions", null, GetPermissions);
+    function GetPermissions(pList) {
+        var SetData = $("#SetPermissionList");
+        console.log(pList);
+        for (var i = 0; i < pList.length; i++) {
+            var Data = "<tr class='row_" + pList[i].PermissionId + "'>" +
+                "<td>" + pList[i].PermissionId + "</td>" +
+                "<td> <select id='menuList_"+i+"' name='customer'>" + LoadMenu(pList[i],i) + " </select></td>" +
+                "<td> <select id=moduleList_" + i + "' name='customer1'>" + LoadModule(pList[i],i) + "</td>" +
+                "<td>" + pList[i].RoutingPath + "</td>" +
+                "<td> <select id=roleList_" + i + "' name='customer2'>" + LoadRole(pList[i], i) + "</td>" +
+                
+
+                "<td>" + "<a href='#' class=' btn-sm btn-warning' onclick='EditModule(" + pList[i].PermissionId + ")' ><span class='glyphicon glyphicon-edit'></span>Edit</a>" +
+                "<a href='#' class='mx-2 btn-sm btn-danger' onclick='ConfirmDelete(" + pList[i].PermissionId + ")'><span class='glyphicon glyphicon-trash'></span>Delete</a>"
+
+            "</td>"
+            "</tr>";            
+            SetData.append(Data);
+        }
+
+    }
+    
+    function LoadMenu(permmission,index) {
+        var options = '';
+        var menuId = permmission.menuId;
+        var menus = permmission.Menus;
+        for (var i = 0; i < menus.length; i++) {
+            
+            options += '<option value="' + menus[i].MenuId + '">' + menus[i].MenuName + '</option>';
+            }        
+        return options;
+    }
+    function LoadModule(permmission, index) {
+        var options = '';
+        
+        var modules = permmission.Modules;
+        for (var i = 0; i < modules.length; i++) {
+
+            options += '<option value="' + modules[i].ModuleId + '">' + modules[i].ModuleName + '</option>';
+        }
+        return options;
+    }
+    function LoadRole(permmission, index) {
+        var options = '';
+
+        var roles = permmission.Roles;
+        
+        for (var i = 0; i < roles.length; i++) {
+            
+            options += '<option value="' + roles[i].RoleId + '">' + roles[i].RoleName + '</option>';
+        }
+        return options;
+    }
+    
+
+    
+</script>
 

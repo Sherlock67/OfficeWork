@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Mvc;
 using TibFinance.Shared.ViewModels;
 using TibFinanceDataAccess.Interface.Menus;
 using TibFinanceDataAccess.Interface.Modules;
@@ -72,12 +73,9 @@ namespace TibFinanceBusinessLayer.Services.Permissions
                                          MenuName = modulemenu.MenuName,
                                          MenuId = modulemenu.MenuId,
                                          RoleId = Convert.ToInt32(p==null?0:p.RoleId),
-                                         
                                          Roles = roles.Select(x => new vmRole { RoleId = x.RoleId, RoleName = x.RoleName }).ToList(),
                                          Modules = modules.Select(x => new vmModule { ModuleId = x.ModuleId, ModuleName = x.ModuleName }).ToList(),
                                          Menus = menus.Select(x => new vmMenu { MenuId = x.MenuId, MenuName = x.MenuName }).ToList()
-
-
                                      }).ToList();
                 return allPermission;
 
@@ -104,6 +102,21 @@ namespace TibFinanceBusinessLayer.Services.Permissions
                 throw ex;
             }
             
+        }
+        public List<SelectListItem> PopulateMenu()
+        {
+            List<SelectListItem> items = new List<SelectListItem>();
+            
+            var results = menuRepository.GetAll();
+            foreach (var item in results)
+            {
+                items.Add(new SelectListItem()
+                {
+                    Text = item.MenuName,
+                    Value = item.MenuId.ToString()
+                });
+            }
+            return items;
         }
     }
 }

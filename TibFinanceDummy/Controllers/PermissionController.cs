@@ -1,14 +1,18 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.ApplicationServices;
 using System.Web.Mvc;
 using System.Web.UI.WebControls.WebParts;
+using TibFinance.Shared.ViewModels;
 using TibFinanceBusinessLayer.IService.IUserServices;
+using TibFinanceBusinessLayer.Services.MenuServices;
 using TibFinanceBusinessLayer.Services.ModuleServices;
 using TibFinanceBusinessLayer.Services.Permissions;
 using TibFinanceBusinessLayer.Services.RoleServices;
 using TibFinanceBusinessLayer.Services.UserServices;
 using TibFinanceDataAccess;
 using TibFinanceDataAccess.Models;
+using TibFinanceShared.ViewModels;
 
 namespace TibFinanceDummy.Controllers
 {
@@ -20,17 +24,20 @@ namespace TibFinanceDummy.Controllers
         private readonly ModuleService moduleService;
         private readonly UserService userService;
         private readonly RoleServices roleServices;
-        public PermissionController(PermissionsServices permissionsServices , RoleServices roleServices)
+        private readonly MenuService menuService;
+        public PermissionController(PermissionsServices permissionsServices , RoleServices roleServices,MenuService menuService)
         {
             this.permissionsServices = permissionsServices;
             this.roleServices = roleServices;
-
+            this.menuService = menuService;
         }
         // GET: Permission
         public ActionResult Index()
         {
-           // var userList = userService.GetAllUsers();
-           // ViewBag.ListOfUsers = new SelectList(userList, "UserId", "UserName");
+            //var userList = userService.GetAllUsers();
+            //ViewBag.ListOfUsers = new SelectList(userList, "UserId", "UserName");
+
+            //permissionsServices.PopulateMenu();
             return View();
         }
         public JsonResult GetAllPermissions()

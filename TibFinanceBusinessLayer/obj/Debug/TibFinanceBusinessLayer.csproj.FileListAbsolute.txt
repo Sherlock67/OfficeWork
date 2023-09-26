@@ -15,3 +15,16 @@ C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceBusinessLayer\obj\
 C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceBusinessLayer\obj\Debug\TibFinanceBusinessLayer.csproj.CopyComplete
 C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceBusinessLayer\obj\Debug\TibFinanceBusinessLayer.dll
 C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceBusinessLayer\obj\Debug\TibFinanceBusinessLayer.pdb
+C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceBusinessLayer\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceBusinessLayer\bin\Debug\System.Web.Helpers.dll
+C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceBusinessLayer\bin\Debug\System.Web.Mvc.dll
+C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceBusinessLayer\bin\Debug\System.Web.Razor.dll
+C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceBusinessLayer\bin\Debug\System.Web.WebPages.Deployment.dll
+C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceBusinessLayer\bin\Debug\System.Web.WebPages.dll
+C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceBusinessLayer\bin\Debug\System.Web.WebPages.Razor.dll
+C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceBusinessLayer\bin\Debug\System.Web.Helpers.xml
+C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceBusinessLayer\bin\Debug\System.Web.Mvc.xml
+C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceBusinessLayer\bin\Debug\System.Web.Razor.xml
+C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceBusinessLayer\bin\Debug\System.Web.WebPages.xml
+C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceBusinessLayer\bin\Debug\System.Web.WebPages.Deployment.xml
+C:\Users\Administrator\source\repos\TibFinanceDummy\TibFinanceBusinessLayer\bin\Debug\System.Web.WebPages.Razor.xml
