@@ -41,6 +41,7 @@
     }
     function onMenuChange(event, menuId, index) {
         var menuId = event.target.value;
+
         pList[index].MenuId = menuId;
        // console.log(menuId);
 
@@ -112,34 +113,25 @@
   
     $("#saveNewPermission").click(function () {
         console.log(JSON.stringify(pList));
-            //$.ajax({
-            //    type: 'POST',
-            //    url: "/Permission/PermissionEdit",
-            //    data: JSON.stringify(pList),
-            //    success: function (data) {
-            //        if (data.success) {
-            //            alert('Item saved to the database.');
-            //        } else {
-            //            alert('Failed to save item.');
-            //        }
-            //    },
+      
+         
+            var settings = {
+                "url": "https://localhost:44308/Permission/PermissionEdit",
+                "method": "POST",
+                "timeout": 0,
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "data": JSON.stringify(pList),
+            };
 
-            //});
-        var settings = {
-            "url": "https://localhost:44308/Permission/PermissionEdit",
-            "method": "POST",
-            "timeout": 0,
-            "headers": {
-                "Content-Type": "application/json"
-            },
-            "data": JSON.stringify(pList),
-        };
-
-        $.ajax(settings).done(function (response) {
-            console.log(response);
-        });
+            $.ajax(settings).done(function (response) {
+                console.log(response);
+            });
         
-        });
+        
+        
+    });
     
      
         

@@ -101,11 +101,11 @@ namespace TibFinanceDataAccess.Repository.UserPermissionRepository
             var permissionList = new List<UserPermission>();
             foreach (var permissions in entity)
             {
-                
-                var permission = db.MenuPermissions.Where(x=>x.PermissionId==permissions.PermissionId).FirstOrDefault();
+
+                var permission = db.MenuPermissions.Where(x => x.PermissionId == permissions.PermissionId).FirstOrDefault();
                 if (permission == null)
                 {
-                    if(permissions.MenuId == 0 && permissions.RoleId == 0 && permissions.ModuleId == 0)
+                    if (permissions.MenuId == 0 || permissions.RoleId == 0 || permissions.ModuleId == 0)
                     {
                         break;
                     }
