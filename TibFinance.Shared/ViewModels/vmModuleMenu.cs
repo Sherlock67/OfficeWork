@@ -10,6 +10,7 @@ namespace TibFinanceShared.ViewModels
 {
     public class vmModuleMenu
     {
+        public int PermissionId { get; set; }
         public int MenuId { get; set; }
         public string MenuName { get; set; }
         public string MenuDescription { get; set; }

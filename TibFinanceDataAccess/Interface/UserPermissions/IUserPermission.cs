@@ -10,5 +10,6 @@ namespace TibFinanceDataAccess.Interface.UserPermissions
 {
     public interface IUserPermission : IBaseRepository<UserPermission>
     {
+        bool CreateList(List<UserPermission> entity);
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using TibFinanceBusinessLayer.Services.MenuServices;
 using TibFinanceBusinessLayer.Services.ModuleServices;
@@ -36,26 +37,10 @@ namespace TibFinanceDummy.Controllers
             var data = permissionsServices.GetAllUserPermission();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult PermissionEdit(UserPermission userPermission)
+        public JsonResult PermissionEdit(List<UserPermission> userPermission)
         {
-            db = new ApplicationDbContext();
-            UserPermission uPermission = db.MenuPermissions.Where(x => x.PermissionId == userPermission.PermissionId).FirstOrDefault();
-            if (uPermission != null)
-            {
-                uPermission.PermissionId = userPermission.PermissionId;
-                uPermission.MenuId = userPermission.MenuId;
-                uPermission.ModuleId = userPermission.ModuleId;
-                uPermission.RoleId = userPermission.RoleId;
-                permissionsServices.UpdateUserPermission(userPermission);
-            }
-            else
-            {
-                userPermission.PermissionId = userPermission.PermissionId;
-                userPermission.MenuId = userPermission.MenuId;
-                userPermission.ModuleId = userPermission.ModuleId;
-                userPermission.RoleId= userPermission.RoleId;
-                permissionsServices.CreateUserPermission(userPermission);
-            }
+
+            var d = permissionsServices.CreateUserPermission(userPermission);
             return Json(userPermission, JsonRequestBehavior.AllowGet);
 
         }

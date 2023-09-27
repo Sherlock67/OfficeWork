@@ -2,25 +2,23 @@
 @{
     ViewBag.Title = "Index";
 }
-
 <h2>All Permission</h2>
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script src="~/Scripts/bootstrap.min.js"></script>
 <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-
 <table id="permissionTable" class="table table-striped">
     <thead>
         <tr>
             <th>Menu Name</th>
             <th>Module Name </th>
             <th>RoleName</th>
-
         </tr>
     </thead>
     <tbody id="SetPermissionList">
+
     </tbody>
     <div class="mt-5">
-        <a href="#" class="btn btn-info" id="add" onclick="getsome()">Add New Permission</a>
+        <a href="#" class="btn btn-info" id="saveNewPermission">Add New Permission</a>
     </div>
 </table>
 <script>
@@ -30,23 +28,32 @@
         var SetData = $("#SetPermissionList"); pList = response;
         console.log(pList);
         for (var i = 0; i < pList.length; i++) {
-            let menu = pList[i];
+            let dataset = pList[i];
             var Data = "<tr class='row_" + pList[i].PermissionId + "'>" +
-                "<td> <select onchange='onManuChange(event," + menu.MenuId + ","+i+")' id='menuList_" + i + "' name='customer'>" + LoadMenu(pList[i], i) + " </select></td>" +
-                "<td> <select id=moduleList_" + i + "' name='customer1'>" + LoadModule(pList[i], i) + "</td>" +
-                "<td> <select id=roleList_" + i + "' name='customer2'>" + LoadRole(pList[i], i) + "</td>" +
+                "<td> <select onchange='onMenuChange(event," + dataset.MenuId + "," + i + ")' id='menuList_" + i + "' name='customer'>" + LoadMenu(pList[i], i) + " </select></td>" +
+                "<td> <select onchange='onModuleChange(event," + dataset.ModuleId + "," + i + ")' id=moduleList_" + i + "' name='customer1'>" + LoadModule(pList[i], i) + "</td>" +
+                "<td> <select onchange='onRoleChange(event," + dataset.RoleId + "," + i + ")' id=roleList_" + i + "' name='customer2'>" + LoadRole(pList[i], i) + "</td>" +
                 "</td>"
             "</tr>";
             SetData.append(Data);
         }
+     
+    }
+    function onMenuChange(event, menuId, index) {
+        var menuId = event.target.value;
+        pList[index].MenuId = menuId;
+       // console.log(menuId);
 
     }
-    function onManuChange(event, menuId, index) {
-        var menuId=event.target.value;
-        console.log(menuId);
-        console.log(pList[index]);
-        pList[index].MenuId = menuId;
-        console.log(pList[index]);
+    function onModuleChange(event, moduleId, index) {
+        var moduleId = event.target.value;
+        pList[index].ModuleId = moduleId;
+        //console.log(moduleId);
+    }
+    function onRoleChange(event, roleId, index) {
+        var roleId = event.target.value;
+        pList[index].RoleId = roleId;
+      //  console.log(roleId);
     }
     function LoadMenu(permmission, index) {
         var options = '';
@@ -102,35 +109,39 @@
         }
         return options;
     }
-    function getsome() {
-        $('#add').change(function () {
-            //debugger
-            var selectedItem = $('.drpdwnlist').val();
-            debugger
-            $.ajax({
-                type: 'POST',
-                url: "/Permission/PermissionEdit",
-                data: {
-                   id: selectedItem 
-                    
-                },
-                success: function (data) {
-                    if (data.success) {
-                        alert('Item saved to the database.');
-                    } else {
-                        alert('Failed to save item.');
-                    }
-                },
+  
+    $("#saveNewPermission").click(function () {
+        console.log(JSON.stringify(pList));
+            //$.ajax({
+            //    type: 'POST',
+            //    url: "/Permission/PermissionEdit",
+            //    data: JSON.stringify(pList),
+            //    success: function (data) {
+            //        if (data.success) {
+            //            alert('Item saved to the database.');
+            //        } else {
+            //            alert('Failed to save item.');
+            //        }
+            //    },
 
-            });
+            //});
+        var settings = {
+            "url": "https://localhost:44308/Permission/PermissionEdit",
+            "method": "POST",
+            "timeout": 0,
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "data": JSON.stringify(pList),
+        };
+
+        $.ajax(settings).done(function (response) {
+            console.log(response);
         });
-    }
-    function PostData() {
-
-    }
-
-
-
-
+        
+        });
+    
+     
+        
 </script>
 

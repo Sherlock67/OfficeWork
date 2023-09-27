@@ -31,9 +31,15 @@ namespace TibFinanceBusinessLayer.Services.Permissions
             this.permissionRepository = new PermissionRepository();
 
         }
-        public UserPermission CreateUserPermission(UserPermission permission)
+        //public UserPermission CreateUserPermission(UserPermission permission)
+        //{
+        //    return permissionRepository.Create(permission);
+
+        //}
+        public bool CreateUserPermission(List<UserPermission> permission)
         {
-            return permissionRepository.Create(permission);
+            permissionRepository.CreateList(permission);
+            return true;
 
         }
         public bool DeleteUserPermission(int id)
@@ -66,12 +72,12 @@ namespace TibFinanceBusinessLayer.Services.Permissions
                                      into permList from p in permList.DefaultIfEmpty()
                                      select new vmModuleMenu
                                      {
-
-                                         ModuleId = Convert.ToInt32(module == null ? 0 : module.ModuleId),
-                                         ModuleName = module.ModuleName,
-                                         MenuDescription = modulemenu == null ? "" : modulemenu.MenuDescription,
-                                         MenuName = modulemenu == null ? "": modulemenu.MenuName,
-                                         MenuId = Convert.ToInt32(modulemenu == null ? 0 : modulemenu.MenuId),
+                                         PermissionId= Convert.ToInt32(p == null ? 0 : p.PermissionId),
+                                         ModuleId = Convert.ToInt32(p == null ? 0 : p.MenuId),
+                                         ModuleName = p == null ? "" : module.ModuleName,
+                                         MenuDescription = p == null ? "" : modulemenu.MenuDescription,
+                                         MenuName = p == null ? "": modulemenu.MenuName,
+                                         MenuId = Convert.ToInt32(p == null ? 0 : p.MenuId),
                                          RoleId = Convert.ToInt32(p == null ? 0 : p.RoleId),
                                          Roles = roles.Select(x => new vmRole { RoleId = x.RoleId, RoleName = x.RoleName }).ToList(),
                                          Modules = modules.Select(x => new vmModule { ModuleId = x.ModuleId, ModuleName = x.ModuleName }).ToList(),
