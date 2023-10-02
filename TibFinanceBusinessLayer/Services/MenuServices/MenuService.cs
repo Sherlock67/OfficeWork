@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TibFinance.Shared.ViewModels;
+using TibFinanceBusinessLayer.Helper;
 using TibFinanceDataAccess.Interface.Menus;
 using TibFinanceDataAccess.Interface.Modules;
 using TibFinanceDataAccess.Models;
@@ -43,28 +45,36 @@ namespace TibFinanceBusinessLayer.Services.MenuServices
             }
             //throw new NotImplementedException();
         }
-        public IEnumerable<vmModuleMenu> GetAllMenus()
+        public IEnumerable<vmModuleMenu> GetAllMenus(int? pageNumber,int? pageSize)
         {
             try
             {
+                var paging = new vmCmnParameters()
+                {
+                    pageNumber = Convert.ToInt32(pageNumber == null ? 0 : pageNumber),
+                    pageSize = Convert.ToInt32(pageSize == null ? 0 : pageSize)
+
+                };
                 var menus = menuRepository.GetAll().ToList();
                 var modules = moduleRepository.GetAll().ToList();
-                var vmModuleMenuList = (from module in modules
-                                        join menu in menus
-                                              on module.ModuleId equals menu.ModuleId into modulemenu
+                var totalData = modules.Count();
+                var vmModuleMenuList = (from menu in menus
+                                        join module in modules
+                                              on menu.ModuleId equals module.ModuleId into modulemenu
                                         from modulemenus in modulemenu.DefaultIfEmpty()
                                         select new vmModuleMenu()
                                         {
-                                            MenuName = modulemenus.MenuName,
-                                            ModuleId = modulemenus.ModuleId,
-                                            ModuleName = module.ModuleName,
-                                            MenuDescription = modulemenus.MenuDescription,
-                                            CreatedBy = modulemenus.CreatedBy,
-                                            UpdatedBy = modulemenus.UpdatedBy,
-                                            MenuId = modulemenus.MenuId,
+                                            total = totalData,
+                                            MenuName = menu.MenuName,
+                                            ModuleId = Convert.ToInt32(modulemenus == null ? 0 : modulemenus.ModuleId),
+                                            ModuleName = modulemenus == null ? "" : modulemenus.ModuleName,
+                                            MenuDescription = menu.MenuDescription,
+                                            CreatedBy = menu.CreatedBy,
+                                            UpdatedBy = menu.UpdatedBy,
+                                            MenuId = Convert.ToInt32(menu.MenuId),
 
 
-                                        }).ToList();
+                                        }).Skip(SkipOverload.Skip(paging)).Take((int)paging.pageSize).ToList();
                 return vmModuleMenuList;
               //  return menuRepository.GetAll().ToList();
             }

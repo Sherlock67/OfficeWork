@@ -65,6 +65,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helper\SkipOverload.cs" />
     <Compile Include="IService\ILoginService\ILoginService.cs" />
     <Compile Include="IService\IMenusService\IMenuService.cs" />
     <Compile Include="IService\IModuleService\IModuleService.cs" />

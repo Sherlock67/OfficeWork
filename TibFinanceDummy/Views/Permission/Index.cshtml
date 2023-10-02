@@ -33,11 +33,15 @@
                 "<td> <select onchange='onMenuChange(event," + dataset.MenuId + "," + i + ")' id='menuList_" + i + "' name='customer'>" + LoadMenu(pList[i], i) + " </select></td>" +
                 "<td> <select onchange='onModuleChange(event," + dataset.ModuleId + "," + i + ")' id=moduleList_" + i + "' name='customer1'>" + LoadModule(pList[i], i) + "</td>" +
                 "<td> <select onchange='onRoleChange(event," + dataset.RoleId + "," + i + ")' id=roleList_" + i + "' name='customer2'>" + LoadRole(pList[i], i) + "</td>" +
+                "<td>  <input type='checkbox'>" + "<td>"
                 "</td>"
             "</tr>";
             SetData.append(Data);
         }
      
+    }
+    function onCreateChange(event, index) {
+
     }
     function onMenuChange(event, menuId, index) {
         var menuId = event.target.value;
@@ -113,8 +117,6 @@
   
     $("#saveNewPermission").click(function () {
         console.log(JSON.stringify(pList));
-      
-         
             var settings = {
                 "url": "https://localhost:44308/Permission/PermissionEdit",
                 "method": "POST",
@@ -128,12 +130,6 @@
             $.ajax(settings).done(function (response) {
                 console.log(response);
             });
-        
-        
-        
-    });
-    
-     
-        
+    }); 
 </script>
 

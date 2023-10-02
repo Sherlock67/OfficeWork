@@ -21,13 +21,13 @@ namespace TibFinanceDummy.Controllers
         }
         public ActionResult Index()
         {
-            var moduleList = moduleService.GetAllModule();
+            var moduleList = moduleService.AllModulesDropDown().ToList();
             ViewBag.ListOfModule = new SelectList(moduleList, "ModuleId", "ModuleName");
             return View();
         }
-        public JsonResult GetAllMenus()
+        public JsonResult GetAllMenus(int? pageNumber ,int? pageSize)
         {
-            var data = menuService.GetAllMenus().ToList();
+            var data = menuService.GetAllMenus(pageNumber,pageSize).ToList();
             return Json(data,JsonRequestBehavior.AllowGet);
         }
 

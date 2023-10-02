@@ -9,6 +9,7 @@ using TibFinanceDataAccess.Models;
 
 namespace TibFinanceDummy.Controllers
 {
+   
     public class ModuleController : Controller
     {
         private readonly ModuleService moduleService;
@@ -24,17 +25,24 @@ namespace TibFinanceDummy.Controllers
         {
             return View();
         }
-        public JsonResult AllModules()
+        [HttpGet]
+
+        public JsonResult AllModules(int? pageNumber, int? pageSize)
         {
-            var data = moduleService.GetAllModule().ToList();
+           // var data1 = moduleService.GetAllModuleWithOutPaging();
+            var data = moduleService.GetAllModule(pageNumber,pageSize).ToList();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
-      
-      
+
+        //[HttpPost]
         public JsonResult AddOrEditModule(Module module)
         {
             db = new ApplicationDbContext();
             Module m = db.Modules.Where(x => x.ModuleId == module.ModuleId).FirstOrDefault();
+            if(string.IsNullOrEmpty(module.ModuleName))
+            {
+                return Json(module, JsonRequestBehavior.AllowGet);
+            }
             if (m!= null)
             {
                 

@@ -44,6 +44,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\CustomerViewModel.cs" />
     <Compile Include="ViewModels\UserLoginVM.cs" />
+    <Compile Include="ViewModels\vmCmnParameters.cs" />
     <Compile Include="ViewModels\vmMenu.cs" />
     <Compile Include="ViewModels\vmModule.cs" />
     <Compile Include="ViewModels\vmModuleMenu.cs" />

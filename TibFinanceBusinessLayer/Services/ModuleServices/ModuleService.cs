@@ -7,6 +7,9 @@ using TibFinanceDataAccess.Interface.Modules;
 using TibFinanceDataAccess.Models;
 using TibFinanceDataAccess.Repository.MenusRepository;
 using TibFinanceDataAccess.Repository.ModuleRepository;
+using TibFinance.Shared.ViewModels;
+using TibFinanceBusinessLayer.Helper;
+
 
 namespace TibFinanceBusinessLayer.Services.ModuleServices
 {
@@ -44,8 +47,12 @@ namespace TibFinanceBusinessLayer.Services.ModuleServices
             }
             //throw new NotImplementedException();
         }
-
-        public IEnumerable<vmModuleMenu> GetAllModule()
+        public IEnumerable<vmModuleMenu> AllModulesDropDown()
+        {
+            var moduleMenuDropDownList = _moduleRepository.GetAll();
+            return (IEnumerable<vmModuleMenu>)moduleMenuDropDownList;
+        }
+        public IEnumerable<vmModuleMenu> GetAllModuleWithOutPaging()
         {
             try
             {
@@ -57,14 +64,46 @@ namespace TibFinanceBusinessLayer.Services.ModuleServices
                                         from modulemenus in modulemenu.DefaultIfEmpty()
                                         select new vmModuleMenu()
                                         {
-                                            MenuName = modulemenus.MenuName,
-                                            ModuleId = modulemenus.ModuleId,
-                                            ModuleName = modulemenus.MenuDescription,
-                                            CreatedBy = modulemenus.CreatedBy,
-                                            UpdatedBy = modulemenus.UpdatedBy,
-                                            MenuId = modulemenus.MenuId,
-
+                                            MenuName = modulemenus == null ? "" : modulemenus.MenuName,
+                                            ModuleId = Convert.ToInt32(module == null ? 0 : module.ModuleId),
+                                            ModuleName = module == null ? "" : module.ModuleName,
+                                            CreatedBy = module == null ? "" : module.CreatedBy,
+                                            UpdatedBy = module == null ? "" : module.UpdatedBy,
+                                            MenuId = Convert.ToInt32(modulemenus == null ? 0 : modulemenus.MenuId),
                                         }).ToList();
+                return vmModuleMenuList;
+
+            }
+            catch (Exception ex) { throw ex; }
+        }
+        public IEnumerable<vmModuleMenu> GetAllModule(int? pageNumber,int? pageSize)
+        {
+            try
+            {
+                var paging = new vmCmnParameters()
+                {
+                    pageNumber = Convert.ToInt32(pageNumber == null ? 0 :pageNumber),
+                    pageSize = Convert.ToInt32(pageSize == null ? 0 : pageSize)
+
+                };
+                var menus = _menuRepository.GetAll().ToList();
+                var modules = _moduleRepository.GetAll().ToList();
+                var totalData = modules.Count();
+                var vmModuleMenuList = (from module in modules
+                                        join menu in menus
+                                              on module.ModuleId equals menu.ModuleId into modulemenu
+                                        from modulemenus in modulemenu.DefaultIfEmpty()
+                                        select new vmModuleMenu()
+                                        {
+                                            total = totalData,
+                                            MenuName = modulemenus == null ? "" : modulemenus.MenuName,
+                                            ModuleId = Convert.ToInt32(module == null ? 0 : module.ModuleId),
+                                            ModuleName = module == null ? "" : module.ModuleName,
+                                            CreatedBy = module == null ? "" : module.CreatedBy,
+                                            UpdatedBy = module == null ? "" : module.UpdatedBy,
+                                            MenuId = Convert.ToInt32(modulemenus == null ? 0 : modulemenus.MenuId),
+
+                                        }).Skip(SkipOverload.Skip(paging)).Take((int)paging.pageSize).ToList();
                 return vmModuleMenuList;
 
             }

@@ -4,6 +4,7 @@ using System.Data.Entity.Migrations;
 using System.Linq;
 using TibFinanceDataAccess.Interface.Menus;
 using TibFinanceDataAccess.Models;
+using TibFinanceShared.ViewModels;
 
 namespace TibFinanceDataAccess.Repository.MenusRepository
 {

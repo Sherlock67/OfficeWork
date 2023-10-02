@@ -27,7 +27,8 @@ namespace TibFinanceDataAccess.Repository.ModuleRepository
         public void Delete(Module entity)
         {
             this.db = new ApplicationDbContext();
-            db.Modules.Remove(entity);
+            var module =   db.Modules.Where(x => x.ModuleId == entity.ModuleId).FirstOrDefault();
+            db.Modules.Remove(module);
             db.SaveChanges();
             //throw new NotImplementedException();
         }
@@ -49,7 +50,7 @@ namespace TibFinanceDataAccess.Repository.ModuleRepository
         public Module GetById(int? Id)
         {
             this.db = new ApplicationDbContext();
-            return db.Modules.Where(x => x.ModuleId == Id).SingleOrDefault();
+            return db.Modules.Where(x => x.ModuleId == Id).FirstOrDefault();
             // throw new NotImplementedException();
         }
 
