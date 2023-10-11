@@ -1,0 +1,142 @@
+﻿@model TibFinanceDataAccess.Models.Artist
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Artist</h2>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<div class="mt-5">
+    <a href="#" class="btn btn-info" onclick="AddNewArtist()">Add New Artist</a>
+</div>
+
+<div class="form-group mx-sm-3 mb-2">
+    <label for="exampleInputEmail1">Search by Artist Name</label>
+    <input type="text" class="form-control" id="artistName"  placeholder="Enter Artist Name">
+</div>
+<button type="button" id="btnsearch" class="btn btn-primary mb-2">Search</button>
+<table id="artistTable" class="table table-striped">
+    <thead>
+        <tr>
+            <th>Artist Id</th>
+            <th>Artist Name</th>
+            <th class="text-center m-5">Action</th>
+        </tr>
+    </thead>
+    <tbody id="SetArtistList">
+    </tbody>
+</table>
+
+
+<div class="modal fade" id="MyModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="d-flex justify-content-start">
+                    <h4 id="ModalTitle">Add New Role</h4>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <a href="#" class="close float-end" data-dismiss="modal">&times;</a>
+                </div>
+            </div>
+            <div class="modal-body">
+                <form id="form">
+                    <fieldset id="SubmitForm">
+                        @Html.HiddenFor(m => m.ArtistId, new { @id = "ArtistId" })
+
+                        <div class="form-group mt-2">
+                            @Html.TextBoxFor(m => m.ArtistName, new { @id = "ArtistName", @class = "form-control", @placeholder = "ArtistName" })
+                        </div>
+                        <div class="form-group mt-2">
+                            <a href="#" class="btn btn-block btn-danger" id="SaveArtist">Create Artist</a>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    //$.get("/Artist/GetAllArtist", null, GetArtist);
+    getArtistByName();
+    $(document).ready(function () {
+        $("#btnsearch").click(function (e) {
+            debugger
+            e.preventDefault();
+            $("#artistTable").show();
+            return getArtistByName();
+
+        });
+        
+    });
+    function GetArtist(ArtistList) {
+        var SetData = $("#SetArtistList");
+        $("#SetArtistList").empty();
+        for (var i = 0; i < ArtistList.length; i++) {
+            var Data = "<tr class='row_" + ArtistList[i].ArtistId + "'>" +
+                "<td id='aid'> " + ArtistList[i].ArtistId + "</td>" +
+                "<td id='aname'>" + ArtistList[i].ArtistName + "</td>" +
+                "<td>" + "<a href='#' class=' btn-sm btn-warning' onclick='EditArtist(" + ArtistList[i].ArtistId + ")' ><span class='glyphicon glyphicon-edit'></span>Edit</a>" +
+                "<a href='#' class='mx-2 btn-sm btn-danger' onclick='ConfirmDelete(" + ArtistList[i].ArtistId + ")'><span class='glyphicon glyphicon-trash'></span>Delete</a>"
+            "</td>"
+            "</tr>";
+            SetData.append(Data);
+        }
+    }
+    function getArtistByName() {
+        var model = {
+            ArtistName: $("#artistName").val(),
+        }
+        $.ajax({
+            type: 'GET',
+            url: "/Artist/GetArtistByName?ArtistName=" + model.ArtistName,
+            dataType: 'json',
+            success: function (response) {
+                if (response) {
+                    GetArtist(response);
+                }
+            },
+            error: function () {
+                console.log('something went wrong - debug it!');
+            }
+        });
+    }
+    function AddNewArtist() {
+        $("#form")[0].reset();
+        $("#ArtistId").val(0);
+     //   $("#DropDwn option:selected").text("--Select Module--");
+        $("#MyModal").modal('show');
+    }
+    $("#SaveArtist").click(function (e) {
+        e.preventDefault();
+        var form = document.getElementById("form");
+        var formData = new FormData(form);
+
+        console.log(formData);
+        $.ajax({
+
+            url: "/Artist/AddOrEditArtist",
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                console.log(response);
+            }
+
+        })
+    })
+    var ConfirmDelete = function (ArtistId) {
+        var artistId = $("#ArtistId").val();
+        $.ajax({
+            type: "POST",
+            url: "/Artist/DeleteArtist?ArtistId=" + ArtistId,
+            success: function (result) {
+                $(".row_" + ArtistId).remove();
+            }
+        })
+    }
+</script>

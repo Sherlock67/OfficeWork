@@ -4,7 +4,6 @@ using System.Data.Entity.Migrations;
 using System.Linq;
 using TibFinanceDataAccess.Interface.Menus;
 using TibFinanceDataAccess.Models;
-using TibFinanceShared.ViewModels;
 
 namespace TibFinanceDataAccess.Repository.MenusRepository
 {
@@ -23,11 +22,16 @@ namespace TibFinanceDataAccess.Repository.MenusRepository
             return obj;
         }
 
-        public void Delete(Menu entity)
+        public void Delete(int id)
         {
             this.db = new ApplicationDbContext();
-            db.Menus.Remove(entity);
-            db.SaveChanges();
+            var menus = db.Menus.Where(x => x.MenuId == id).FirstOrDefault();
+            if(menus != null)
+            {
+                db.Menus.Remove(menus);
+                db.SaveChanges();
+            }
+          
             //throw new NotImplementedException();
         }
 
@@ -49,6 +53,11 @@ namespace TibFinanceDataAccess.Repository.MenusRepository
         {
             this.db = new ApplicationDbContext();
             return db.Menus.Where(x => x.MenuId == Id).SingleOrDefault();
+        }
+
+        public IEnumerable<Menu> SearchByName(string name)
+        {
+            throw new NotImplementedException();
         }
 
         public void Update(Menu entity)

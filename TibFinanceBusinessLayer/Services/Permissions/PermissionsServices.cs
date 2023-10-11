@@ -46,8 +46,8 @@ namespace TibFinanceBusinessLayer.Services.Permissions
         {
             try
             {
-                var permission = permissionRepository.GetById(id);
-                permissionRepository.Delete(permission);
+               // var permission = permissionRepository.GetById(id);
+                permissionRepository.Delete(id);
                 return true;
             }
             catch (Exception)

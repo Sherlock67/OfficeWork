@@ -56,11 +56,16 @@ namespace TibFinanceDataAccess.Repository.UserPermissionRepository
 
 
 
-        public void Delete(UserPermission entity)
+        public void Delete(int id)
         {
             db = new ApplicationDbContext();
-            db.MenuPermissions.Remove(entity);
-            db.SaveChanges();
+            var permissions = db.MenuPermissions.Where(x => x.PermissionId == id).FirstOrDefault();
+            if(permissions != null)
+            {
+                db.MenuPermissions.Remove(permissions);
+                db.SaveChanges();
+            }
+            
            
         }
 
@@ -140,6 +145,11 @@ namespace TibFinanceDataAccess.Repository.UserPermissionRepository
             var obj = db.MenuPermissions.AddRange(permissionList);
             db.SaveChanges();
             return true;
+        }
+
+        public IEnumerable<UserPermission> SearchByName(string name)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TibFinanceDataAccess.Interface.Users;
 using TibFinanceDataAccess.Models;
 
@@ -21,11 +19,16 @@ namespace TibFinanceDataAccess.Repository.UserRepository
 
         }
 
-        public void Delete(User entity)
+        public void Delete(int id)
         {
             db = new ApplicationDbContext();
-            db.Users.Remove(entity);
-            db.SaveChanges();
+            var entity = db.Users.Where(x => x.UserId == id).FirstOrDefault();
+            if(entity != null)
+            {
+                db.Users.Remove(entity);
+                db.SaveChanges();
+            }
+           
         }
 
         public IEnumerable<User> GetAll()
@@ -49,6 +52,11 @@ namespace TibFinanceDataAccess.Repository.UserRepository
             db = new ApplicationDbContext();
 
             return db.Users.Where(x => x.UserId == Id).SingleOrDefault();
+        }
+
+        public IEnumerable<User> SearchByName(string name)
+        {
+            throw new NotImplementedException();
         }
 
         public void Update(User entity)

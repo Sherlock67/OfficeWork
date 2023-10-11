@@ -25,9 +25,16 @@ namespace TibFinanceDataAccess.Repository.CustomerRepository
         public void Delete(Customer entity)
         {
             db.Customers.Remove(entity);
+            
             db.SaveChanges();
             
         }
+
+        public void Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Customer> GetAll()
         {
             try
@@ -42,6 +49,11 @@ namespace TibFinanceDataAccess.Repository.CustomerRepository
         public Customer GetById(int? Id)
         {
             return db.Customers.Where(x => x.CustomerId == Id).SingleOrDefault();
+        }
+
+        public IEnumerable<Customer> SearchByName(string name)
+        {
+            throw new NotImplementedException();
         }
 
         public void Update(Customer entity)

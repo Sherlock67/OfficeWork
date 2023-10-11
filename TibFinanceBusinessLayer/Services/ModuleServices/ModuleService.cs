@@ -34,8 +34,8 @@ namespace TibFinanceBusinessLayer.Services.ModuleServices
         {
             try
             {
-                var module = _moduleRepository.GetById(id);
-                _moduleRepository.Delete(module);
+                //var module = _moduleRepository.GetById(id);
+                _moduleRepository.Delete(id);
                 return true;
             }
             

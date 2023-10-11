@@ -24,8 +24,8 @@ namespace TibFinanceBusinessLayer.Services.UserServices
         {
             try
             {
-                var user = userRepository.GetById(id);
-                userRepository.Delete(user);
+                //var user = userRepository.GetById(id);
+                userRepository.Delete(id);
                 return true;
             }
 

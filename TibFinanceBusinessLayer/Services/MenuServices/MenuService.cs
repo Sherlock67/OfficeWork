@@ -32,8 +32,8 @@ namespace TibFinanceBusinessLayer.Services.MenuServices
         {
             try
             {
-                var module = menuRepository.GetById(id);
-                menuRepository.Delete(module);
+                //var module = menuRepository.GetById(id);
+                menuRepository.Delete(id);
                 return true;
             }
 

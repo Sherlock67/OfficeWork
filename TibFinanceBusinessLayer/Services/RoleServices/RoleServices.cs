@@ -30,8 +30,8 @@ namespace TibFinanceBusinessLayer.Services.RoleServices
         {
             try
             {
-                var module = roleRepository.GetById(id);
-                roleRepository.Delete(module);
+                //var module = roleRepository.GetById(id);
+                roleRepository.Delete(id);
                 return true;
             }
 

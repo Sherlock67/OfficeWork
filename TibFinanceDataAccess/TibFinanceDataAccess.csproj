@@ -64,74 +64,55 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationDbContext.cs" />
+    <Compile Include="Interface\Artists\IArtist.cs" />
     <Compile Include="Interface\Base\IBaseRepository.cs" />
     <Compile Include="Interface\Customers\ICustomer.cs" />
+    <Compile Include="Interface\Genres\IGenre.cs" />
     <Compile Include="Interface\Login\ILogin.cs" />
     <Compile Include="Interface\Menus\IMenu.cs" />
     <Compile Include="Interface\Modules\IModule.cs" />
     <Compile Include="Interface\Roles\IRole.cs" />
     <Compile Include="Interface\UserPermissions\IUserPermission.cs" />
     <Compile Include="Interface\Users\IUser.cs" />
-    <Compile Include="Migrations\202309180704301_ApplyPrevious migration into dataaccess project.cs" />
-    <Compile Include="Migrations\202309180704301_ApplyPrevious migration into dataaccess project.designer.cs">
-      <DependentUpon>202309180704301_ApplyPrevious migration into dataaccess project.cs</DependentUpon>
+    <Compile Include="Migrations\202310090849392_new database.cs" />
+    <Compile Include="Migrations\202310090849392_new database.designer.cs">
+      <DependentUpon>202310090849392_new database.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202309200959242_User Login Table.cs" />
-    <Compile Include="Migrations\202309200959242_User Login Table.designer.cs">
-      <DependentUpon>202309200959242_User Login Table.cs</DependentUpon>
+    <Compile Include="Migrations\202310090903108_genre table.cs" />
+    <Compile Include="Migrations\202310090903108_genre table.designer.cs">
+      <DependentUpon>202310090903108_genre table.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202309201035105_UserTable property type change.cs" />
-    <Compile Include="Migrations\202309201035105_UserTable property type change.designer.cs">
-      <DependentUpon>202309201035105_UserTable property type change.cs</DependentUpon>
+    <Compile Include="Migrations\202310090905440_genre table adding.cs" />
+    <Compile Include="Migrations\202310090905440_genre table adding.designer.cs">
+      <DependentUpon>202310090905440_genre table adding.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202309210429326_Module table migrations.cs" />
-    <Compile Include="Migrations\202309210429326_Module table migrations.designer.cs">
-      <DependentUpon>202309210429326_Module table migrations.cs</DependentUpon>
+    <Compile Include="Migrations\202310090945498_artist and album table.cs" />
+    <Compile Include="Migrations\202310090945498_artist and album table.designer.cs">
+      <DependentUpon>202310090945498_artist and album table.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202309211102261_Module table and menu table foreign key intergation.cs" />
-    <Compile Include="Migrations\202309211102261_Module table and menu table foreign key intergation.designer.cs">
-      <DependentUpon>202309211102261_Module table and menu table foreign key intergation.cs</DependentUpon>
+    <Compile Include="Migrations\202310090951292_artist and album navigation property.cs" />
+    <Compile Include="Migrations\202310090951292_artist and album navigation property.designer.cs">
+      <DependentUpon>202310090951292_artist and album navigation property.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202309211306324_module and menu datatable schema update.cs" />
-    <Compile Include="Migrations\202309211306324_module and menu datatable schema update.designer.cs">
-      <DependentUpon>202309211306324_module and menu datatable schema update.cs</DependentUpon>
+    <Compile Include="Migrations\202310090958430_artist and album .cs" />
+    <Compile Include="Migrations\202310090958430_artist and album .designer.cs">
+      <DependentUpon>202310090958430_artist and album .cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202309220600255_Role table migrations.cs" />
-    <Compile Include="Migrations\202309220600255_Role table migrations.designer.cs">
-      <DependentUpon>202309220600255_Role table migrations.cs</DependentUpon>
+    <Compile Include="Migrations\202310091003136_new relationship in between artist and album.cs" />
+    <Compile Include="Migrations\202310091003136_new relationship in between artist and album.designer.cs">
+      <DependentUpon>202310091003136_new relationship in between artist and album.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202309221057357_User and Role relationship.cs" />
-    <Compile Include="Migrations\202309221057357_User and Role relationship.designer.cs">
-      <DependentUpon>202309221057357_User and Role relationship.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202309250808454_user permission table integrated.cs" />
-    <Compile Include="Migrations\202309250808454_user permission table integrated.designer.cs">
-      <DependentUpon>202309250808454_user permission table integrated.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202309251249146_user permission table changed a variable.cs" />
-    <Compile Include="Migrations\202309251249146_user permission table changed a variable.designer.cs">
-      <DependentUpon>202309251249146_user permission table changed a variable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202309251338133_user permission table changed again with roleid and role name.cs" />
-    <Compile Include="Migrations\202309251338133_user permission table changed again with roleid and role name.designer.cs">
-      <DependentUpon>202309251338133_user permission table changed again with roleid and role name.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202309260600040_permission class nullable chnaged on ids.cs" />
-    <Compile Include="Migrations\202309260600040_permission class nullable chnaged on ids.designer.cs">
-      <DependentUpon>202309260600040_permission class nullable chnaged on ids.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202309260814011_moduleid null.cs" />
-    <Compile Include="Migrations\202309260814011_moduleid null.designer.cs">
-      <DependentUpon>202309260814011_moduleid null.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202309261018424_permission table updated and all corresponding name removed.cs" />
-    <Compile Include="Migrations\202309261018424_permission table updated and all corresponding name removed.designer.cs">
-      <DependentUpon>202309261018424_permission table updated and all corresponding name removed.cs</DependentUpon>
+    <Compile Include="Migrations\202310091007445_relationship modified.cs" />
+    <Compile Include="Migrations\202310091007445_relationship modified.designer.cs">
+      <DependentUpon>202310091007445_relationship modified.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Album.cs" />
+    <Compile Include="Models\Artist.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Department.cs" />
+    <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\Grade.cs" />
     <Compile Include="Models\Menu.cs" />
     <Compile Include="Models\Model1.cs" />
@@ -145,7 +126,9 @@
     <Compile Include="Models\ViewModel\GradeViewModel.cs" />
     <Compile Include="Models\ViewModel\StudentViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\ArtistsRepository\ArtistRepository.cs" />
     <Compile Include="Repository\CustomerRepository\CustomerRepository.cs" />
+    <Compile Include="Repository\GenresRepository\GenreRepository.cs" />
     <Compile Include="Repository\LoginRepository\LoginRepository.cs" />
     <Compile Include="Repository\MenusRepository\MenuRepository.cs" />
     <Compile Include="Repository\ModuleRepository\ModuleRepository.cs" />
@@ -162,54 +145,36 @@
     <Folder Include="Models\CodeFirst\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202309180704301_ApplyPrevious migration into dataaccess project.resx">
-      <DependentUpon>202309180704301_ApplyPrevious migration into dataaccess project.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202309200959242_User Login Table.resx">
-      <DependentUpon>202309200959242_User Login Table.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202309201035105_UserTable property type change.resx">
-      <DependentUpon>202309201035105_UserTable property type change.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202309210429326_Module table migrations.resx">
-      <DependentUpon>202309210429326_Module table migrations.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202309211102261_Module table and menu table foreign key intergation.resx">
-      <DependentUpon>202309211102261_Module table and menu table foreign key intergation.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202309211306324_module and menu datatable schema update.resx">
-      <DependentUpon>202309211306324_module and menu datatable schema update.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202309220600255_Role table migrations.resx">
-      <DependentUpon>202309220600255_Role table migrations.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202309221057357_User and Role relationship.resx">
-      <DependentUpon>202309221057357_User and Role relationship.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202309250808454_user permission table integrated.resx">
-      <DependentUpon>202309250808454_user permission table integrated.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202309251249146_user permission table changed a variable.resx">
-      <DependentUpon>202309251249146_user permission table changed a variable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202309251338133_user permission table changed again with roleid and role name.resx">
-      <DependentUpon>202309251338133_user permission table changed again with roleid and role name.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202309260600040_permission class nullable chnaged on ids.resx">
-      <DependentUpon>202309260600040_permission class nullable chnaged on ids.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202309260814011_moduleid null.resx">
-      <DependentUpon>202309260814011_moduleid null.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202309261018424_permission table updated and all corresponding name removed.resx">
-      <DependentUpon>202309261018424_permission table updated and all corresponding name removed.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\TibFinance.Shared\TibFinanceShared.csproj">
       <Project>{76ff5593-1ae5-4f6a-89d0-9a2f0cdb8a7c}</Project>
       <Name>TibFinanceShared</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202310090849392_new database.resx">
+      <DependentUpon>202310090849392_new database.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202310090903108_genre table.resx">
+      <DependentUpon>202310090903108_genre table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202310090905440_genre table adding.resx">
+      <DependentUpon>202310090905440_genre table adding.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202310090945498_artist and album table.resx">
+      <DependentUpon>202310090945498_artist and album table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202310090951292_artist and album navigation property.resx">
+      <DependentUpon>202310090951292_artist and album navigation property.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202310090958430_artist and album .resx">
+      <DependentUpon>202310090958430_artist and album .cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202310091003136_new relationship in between artist and album.resx">
+      <DependentUpon>202310091003136_new relationship in between artist and album.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202310091007445_relationship modified.resx">
+      <DependentUpon>202310091007445_relationship modified.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

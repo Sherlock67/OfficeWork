@@ -16,6 +16,9 @@ namespace TibFinanceDataAccess
         public DbSet<Menu> Menus { get; set; }
         public DbSet<Role>Roles { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Genre> Genres { get; set; }
+        public DbSet<Artist>Artists { get; set; }
+        public DbSet<Album> Albums { get; set; }
         public DbSet<UserPermission> MenuPermissions { get; set; }
     }
 }

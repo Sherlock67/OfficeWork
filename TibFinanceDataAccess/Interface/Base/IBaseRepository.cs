@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,7 @@ namespace TibFinanceDataAccess.Interface.Base
 
          IEnumerable<T> GetAll();
          T GetById(int? Id);
-         void Delete(T entity);
+         void Delete(int id);
+         IEnumerable<T> SearchByName (string name);
     }
 }

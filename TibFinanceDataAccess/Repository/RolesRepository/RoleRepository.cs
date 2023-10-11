@@ -22,11 +22,17 @@ namespace TibFinanceDataAccess.Repository.RolesRepository
             return obj;
         }
 
-        public void Delete(Role entity)
+        public void Delete(int id)
         {
             db = new ApplicationDbContext();
-            db.Roles.Remove(entity);
-            db.SaveChanges();
+            var role = db.Roles.Where(x=>x.RoleId == id).FirstOrDefault();  
+            if(role != null)
+            {
+                db.Roles.Remove(role);
+                db.SaveChanges();
+
+            }
+           
             //throw new NotImplementedException();
         }
 
@@ -50,6 +56,11 @@ namespace TibFinanceDataAccess.Repository.RolesRepository
             db = new ApplicationDbContext();
            // this.db = new ApplicationDbContext();
             return db.Roles.Where(x => x.RoleId == Id).SingleOrDefault();
+        }
+
+        public IEnumerable<Role> SearchByName(string name)
+        {
+            throw new NotImplementedException();
         }
 
         public void Update(Role entity)
